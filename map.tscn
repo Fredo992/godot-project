@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cf43qjupgcb6j"]
+
+[ext_resource type="Script" uid="uid://broyevkux8eum" path="res://map.gd" id="1_wijl4"]
+[ext_resource type="Script" uid="uid://ctpcmurg2i8cf" path="res://camera_2d.gd" id="2_wijl4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wijl4"]
+load_path = "res://.godot/imported/ChatGPT Image Jun 4, 2026, 03_48_28 PM.png-15fa94ab13cb2ac36ccfe121d4f21c55.ctex"
+
+[node name="Map" type="Node2D" unique_id=1446147403]
+script = ExtResource("1_wijl4")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=891806484]
+position = Vector2(320, 940)
+zoom = Vector2(1, 2)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("2_wijl4")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2011711174]
+visible = false
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("CompressedTexture2D_wijl4")

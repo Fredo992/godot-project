@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cf43qjupgcb6j"]
+
+[ext_resource type="Script" uid="uid://broyevkux8eum" path="res://map.gd" id="1_wijl4"]
+[ext_resource type="Texture2D" uid="uid://duo43xnka2mjt" path="res://place_holder_map.png" id="2_e0an3"]
+
+[node name="Map" type="Node2D" unique_id=1446147403]
+script = ExtResource("1_wijl4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1596108905]
+visible = false
+position = Vector2(575.49994, 324)
+scale = Vector2(6.2, 2.6776857)
+texture = ExtResource("2_e0an3")

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://unmgdielofxt"]
+
+[ext_resource type="Script" uid="uid://c3pxx7qsgs5u3" path="res://map_object.gd" id="1_wkkel"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
+size = Vector2(19, 22)
+
+[node name="Map_object" type="Node2D" unique_id=111385838]
+script = ExtResource("1_wkkel")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=148439703]
+position = Vector2(4.172325e-07, 1.0000001)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1585908335]
+position = Vector2(4.172325e-07, 1.0000001)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=45128305]
+position = Vector2(0.49999958, 0)
+shape = SubResource("RectangleShape2D_kdubu")

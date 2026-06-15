@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c7am0umgo0p5u"]
+
+[ext_resource type="PackedScene" uid="uid://unmgdielofxt" path="res://map_object.tscn" id="1_jheg5"]
+[ext_resource type="Texture2D" uid="uid://dhnj38iq2t5v6" path="res://sprites/map nodes/fixed/place_holder_castle.png" id="2_5g2eo"]
+
+[node name="Menutest" type="Node2D" unique_id=518348238]
+
+[node name="Map_object" parent="." unique_id=111385838 instance=ExtResource("1_jheg5")]
+position = Vector2(273, 165)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Map_object" unique_id=518043981]
+texture = ExtResource("2_5g2eo")
+
+[node name="PopupMenu" type="PopupMenu" parent="." unique_id=1221381251]
+item_count = 3
+item_0/text = "opzione A"
+item_0/id = 0
+item_1/text = "Opzione B"
+item_1/id = 1
+item_2/text = "opzione C"
+item_2/id = 2
