@@ -23,6 +23,7 @@ offset_right = -640.0
 offset_bottom = -360.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_3kyxu")
 
 [node name="SfondoMenu" type="PanelContainer" parent="." unique_id=2062240435]
@@ -30,8 +31,9 @@ layout_direction = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sxb7q")
 
 [node name="OptionsContainer" type="VBoxContainer" parent="SfondoMenu" unique_id=9488895]
 layout_mode = 2
-mouse_filter = 0
+mouse_filter = 2

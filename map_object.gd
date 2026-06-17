@@ -9,6 +9,11 @@ var option_menu: Dictionary = {}
 var menu_istanza = null
 var menu_scena = load("res://classes/ui/menu/popup_menu.tscn")
 @onready var collision_node = $Area2D/CollisionShape2D
+
+
+
+
+
 func _ready() -> void:
 	area.mouse_entered.connect(_on_mouse_entered)
 	area.mouse_exited.connect(_on_mouse_exited)
@@ -27,8 +32,10 @@ func _on_mouse_click() -> void:
 			menu_istanza.visible = true
 	else:
 		menu_istanza = menu_scena.instantiate() 
+		menu_istanza._on_instance(test_options)
 		get_tree().root.add_child(menu_istanza)
 		menu_istanza.global_position = get_global_mouse_position()
+		
 	
 	
 	
@@ -42,19 +49,29 @@ func _on_mouse_exited() -> void:
 	sprite.scale = Vector2(1.0, 1.0)
 
 func _input(event: InputEvent) -> void:
-	# Questo controlla i click FUORI dall'area
 	if event.is_action_pressed("click"):
-		# Se il menu esiste ed è aperto...
 		if menu_istanza != null and menu_istanza.visible:
-			# ...e il mouse NON è sopra l'oggetto in questo momento
-		
-			# TRUCCO SEMPLICE: Controlliamo se il mouse è lontano dall'oggetto
-			var distanza = global_position.distance_to(get_global_mouse_position())
+			
+			var mouse_pos = get_global_mouse_position()
+			var mouse_distance_from_node = global_position.distance_to(mouse_pos)
 			var maxDistance = collision_node.shape.size.x / 2
-			if distanza > maxDistance: # Cambia 64 in base a quanto è grande la tua sprite
+			var menu_rect: Rect2 = menu_istanza.get_node("SfondoMenu").get_global_rect()
+			if mouse_distance_from_node > maxDistance && !menu_rect.has_point(mouse_pos): # Cambia 64 in base a quanto è grande la tua sprite
 				menu_istanza.visible = false
 				print("Cliccato fuori! Chiudo il menu.")
 
 func _on_area_input_event(node, event: InputEvent, int) -> void:
 	if (event.is_action_pressed("click")):
 		_on_mouse_click()
+
+func _setup_options_menu():
+	return 
+	
+var test_options: Dictionary[String, Callable] = {
+	"entra": func(): print("sono entrato"),
+	"combatti": func(): print("stai combattendo entrato"),
+	"esci": func(): print("sono uscito"),
+	
+	
+	
+}
