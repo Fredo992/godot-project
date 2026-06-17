@@ -69,7 +69,7 @@ func _setup_options_menu():
 	
 var test_options: Dictionary[String, Callable] = {
 	"entra": func(): print("sono entrato"),
-	"combatti": func(): print("stai combattendo entrato"),
+	"combatti AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": func(): print("stai combattendo entrato"),
 	"esci": func(): print("sono uscito"),
 	
 	
