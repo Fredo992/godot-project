@@ -18,6 +18,7 @@ config/icon="uid://ditxo7iv8o5hp"
 
 MapNodesLoader="*uid://djorrsaeo10kr"
 SpritesLoader="*uid://bo5lx67oel5hh"
+InputManager="*uid://becpnfcuy4xug"
 
 [display]
 

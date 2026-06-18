@@ -10,14 +10,17 @@ var menu_istanza = null
 var menu_scena = load("res://classes/ui/menu/popup_menu.tscn")
 @onready var collision_node = $Area2D/CollisionShape2D
 
-
-
-
+func sub(context):
+	if context is InputEventMouseButton and context.pressed and context.button_index == MOUSE_BUTTON_LEFT:
+		var shape = area.get_node("CollisionShape2D").shape
+		var local_pos = area.to_local(context.global_position)
+		if shape.get_rect().has_point(local_pos):
+			_on_mouse_click()
 
 func _ready() -> void:
+	InputManager.subscribe_click_ui(sub)
 	area.mouse_entered.connect(_on_mouse_entered)
 	area.mouse_exited.connect(_on_mouse_exited)
-	area.input_event.connect(_on_area_input_event)
 	_setup()
 
 func _setup() -> void:
@@ -51,7 +54,6 @@ func _on_mouse_exited() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		if menu_istanza != null and menu_istanza.visible:
-			
 			var mouse_pos = get_global_mouse_position()
 			var mouse_distance_from_node = global_position.distance_to(mouse_pos)
 			var maxDistance = collision_node.shape.size.x / 2
@@ -60,9 +62,7 @@ func _input(event: InputEvent) -> void:
 				menu_istanza.visible = false
 				print("Cliccato fuori! Chiudo il menu.")
 
-func _on_area_input_event(node, event: InputEvent, int) -> void:
-	if (event.is_action_pressed("click")):
-		_on_mouse_click()
+
 
 func _setup_options_menu():
 	return 

@@ -13,9 +13,8 @@ func _on_instance(options: Dictionary[String, Callable]):
 		_setup_button_behavior(newButton, key, options[key])
 		$SfondoMenu/OptionsContainer.add_child(newButton)
 		
-	if $SfondoMenu/OptionsContainer.get_child_count() > 0:
-		$SfondoMenu/OptionsContainer.get_child(0).grab_focus()
-	
+		
+
 func _setup_button_behavior(button: Button, text: String, behavior: Callable):
 	button.text = text
 	button.pressed.connect(behavior)
