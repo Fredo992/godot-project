@@ -1,8 +1,11 @@
 extends MapObject
 
-func _on_mouse_click() -> void:
-	print("ho cliccato castello ")
 
 
 func _setup() -> void:
 	sprite.texture = SpritesLoader.fixed_sprites["place_holder_castle.png"]
+	_setup_options_menu({
+	"entra": func(): print("sono entrato al castello "),
+	"combatti ": func(): print("stai combattendo il re matto"),
+	"esci": func(): print("sono uscito dal castello "),
+})

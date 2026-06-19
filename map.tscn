@@ -17,7 +17,9 @@ drag_vertical_enabled = true
 script = ExtResource("2_wijl4")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2011711174]
+visible = false
 texture_filter = 1
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 texture = SubResource("CompressedTexture2D_wijl4")

@@ -24,15 +24,11 @@ func makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 	var instance = scene.instantiate()
 	add_child(instance)
 	instance.position = entity_pos
+	
 	return instance
 
-
-
-
 func _ready():	
-	
 	var space_between_rows = getRowsSpacing(number_of_rows)
-	
 	fixed_scenes = MapNodesLoader.fixed_nodes
 	random_scenes = MapNodesLoader.random_nodes
 	for i in range(number_of_rows):
@@ -49,7 +45,7 @@ func _ready():
 		else:
 			for entity_pos in getEntityPositionsOnX(randi_range(1,3), (space_between_rows * (i+1))):
 				makeInstanceOfScene(random_scenes[random_scenes.keys().pick_random()], entity_pos)
+
 			
-		
 
 	
