@@ -7,5 +7,5 @@ func _setup() -> void:
 	"entra": func(): print("sono entrato allo shop  "),
 	"compra ": func(): print("compra qualcosa si "),
 	"rapina": func(): print("ti spacco il culo kid"),
-	"esci": func(): print("sono uscito dal castello ")
+	"esci": func(): print("sono uscito dal negozio ")
 })

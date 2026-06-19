@@ -26,7 +26,7 @@ func sub(context):
 			
 			for hit in hits:
 				if hit.collider == area:
-					print("Sto cliccando l'oggetto: ", name)
+					
 					_on_mouse_click()
 					if get_viewport():
 						get_viewport().set_input_as_handled()
@@ -49,7 +49,7 @@ func _on_mouse_click() -> void:
 		elif (!menu_istanza.visible):
 			menu_istanza.visible = true
 	else:
-		print("faccio il menu")
+		
 		menu_istanza = menu_scena.instantiate() 
 		menu_istanza._on_instance(option_menu)
 		get_tree().root.add_child(menu_istanza)

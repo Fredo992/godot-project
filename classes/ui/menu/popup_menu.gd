@@ -16,7 +16,7 @@ func _on_instance(options: Dictionary[String, Callable]):
 		$SfondoMenu/OptionsContainer.add_child(newButton)
 		
 	is_menu_istantiate = true
-	#InputManager.subscribe_click_ui(sub)
+	InputManager.subscribe_click_ui(sub)
 
 func _setup_button_behavior(button: Button, text: String, behavior: Callable):
 	button.text = text
@@ -35,27 +35,23 @@ func _set_button_styles(button: Button):
 	button.add_theme_stylebox_override("focus", button_style_hover)
 
 
-#func sub(context):
-	## Se il menu è già invisibile o lo sheet non esiste, non fare nulla
-	#if not visible or out_of_border_sheet == null:
-		#return
-#
-	#if context is InputEventMouseButton and context.pressed and context.button_index == MOUSE_BUTTON_LEFT:
-#
-		#await get_tree().process_frame
-		#
-		#if !is_menu_istantiate:
-			#return
-		#if not visible:
-			#return
-			#
-		#var sheet_rect: Rect2 = out_of_border_sheet.get_global_rect()
-		#
-		#if sheet_rect.has_point(context.global_position):
-##
-			#var menu_rect = $SfondoMenu.get_global_rect()
-			#if menu_rect.has_point(context.global_position):
-				#print(menu_rect)
-				#return
-				#
-			#visible = false
+func sub(context):
+	if not visible or out_of_border_sheet == null:
+		return
+
+	if context is InputEventMouseButton and context.pressed and context.button_index == MOUSE_BUTTON_LEFT:
+		
+		# Controlli istantanei senza aspettare il frame successivo
+		if !is_menu_istantiate or not visible:
+			return
+			
+		var mouse_pos = get_global_mouse_position()
+		var sheet_rect: Rect2 = out_of_border_sheet.get_global_rect()
+		
+		if sheet_rect.has_point(mouse_pos):
+			var menu_rect = $SfondoMenu.get_global_rect()
+			
+			if menu_rect.has_point(mouse_pos):
+				return # Cliccato dentro il menu: non fare nulla
+				
+			visible = false # Cliccato fuori dal menu (ma dentro lo sheet): chiudi
