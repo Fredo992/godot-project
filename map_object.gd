@@ -52,6 +52,7 @@ func _on_mouse_click() -> void:
 		menu_istanza = menu_scena.instantiate() 
 		menu_istanza._on_instance(option_menu)
 		add_child(menu_istanza)
+		
 		menu_istanza.position = Vector2.ZERO # Oppure Vector2(50, 0) per spostarlo un po'
 
 

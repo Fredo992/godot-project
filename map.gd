@@ -2,7 +2,7 @@ extends Node2D
 
 const INTERACTABLE_SCENE: PackedScene = preload("res://map_object.tscn")
 
-var number_of_rows = 20
+var number_of_rows = 16
 var screen_height = 1040
 var fixed_scenes
 var random_scenes
