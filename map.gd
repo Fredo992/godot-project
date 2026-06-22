@@ -6,6 +6,7 @@ var number_of_rows = 20
 var screen_height = 1040
 var fixed_scenes
 var random_scenes
+var space_between_rows
 
 func getRowsSpacing(number_of_rows):
 	return screen_height / (number_of_rows + 1)
@@ -24,17 +25,16 @@ func makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 	var instance = scene.instantiate()
 	add_child(instance)
 	instance.position = entity_pos
-	
 	return instance
 
 func _ready():	
-	var space_between_rows = getRowsSpacing(number_of_rows)
+	InputManager.subscribe_click_ui(_unhandled_input)
+	space_between_rows = getRowsSpacing(number_of_rows)
 	fixed_scenes = MapNodesLoader.fixed_nodes
 	random_scenes = MapNodesLoader.random_nodes
 	for i in range(number_of_rows):
 		if (i == 0):
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))
-
 			makeInstanceOfScene(fixed_scenes["castle_object.tscn"], positions[0])
 		elif (i == number_of_rows -1):
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))
@@ -46,6 +46,32 @@ func _ready():
 			for entity_pos in getEntityPositionsOnX(randi_range(1,3), (space_between_rows * (i+1))):
 				makeInstanceOfScene(random_scenes[random_scenes.keys().pick_random()], entity_pos)
 
-			
 
+var trascinamento_attivo: bool = false
+var offset_y: float = 0.0
+
+func _unhandled_input(event: InputEvent) -> void:
+	# 1. Controlliamo il tasto destro per il trascinamento
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		trascinamento_attivo = event.pressed
+		# Memorizziamo la differenza tra la posizione del mondo e il mouse al momento del click
+		if trascinamento_attivo:
+			offset_y = event.position.y - position.y
+		
+	# 2. Se muoviamo il mouse, spostiamo il mondo solo in verticale
+	if event is InputEventMouseMotion and trascinamento_attivo:
+		# Usiamo la posizione assoluta del mouse meno l'offset calcolato al click
+		# Questo garantisce che la mappa segua il mouse senza usare il "relative"
+		position.y = event.position.y - offset_y
+		
 	
+		
+		# Controllo superiore
+		if position.y >= 0:
+			position.y = 0
+
+		if position.y <= -(screen_height - get_viewport_rect().size.y):
+			position.y = -(screen_height - get_viewport_rect().size.y)
+
+		position.x = 0.0
+		

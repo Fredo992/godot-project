@@ -20,10 +20,25 @@ func subscribe_click_battle(callable: Callable):
 
 
 func _input(event):
-	var sopravvissuti: Array = []
+	# 1. FILTRO: È un click del mouse?
+	if event is InputEventMouseButton and event.pressed:
+		_gestisci_click_mouse(event)
+		return
+		
+	# 2. FILTRO: È la pressione di un tasto sulla tastiera?
+	if event is InputEventKey and event.pressed:
+		return
+	
+	
+func _gestisci_click_mouse(event: InputEventMouseButton) -> void:
+	var subs_alive: Array = []
+	
+	# Smistiamo l'evento SOLO ai subscriber dello stato corrente 
+	# che sono effettivamente interessati ai click del mouse
 	for subscriber in _subscribers[_currentState]:
 		if subscriber.is_valid():
+			# Passiamo l'evento pulito (sappiamo già che è un click)
 			subscriber.call(event)
-			sopravvissuti.append(subscriber)
+			subs_alive.append(subscriber)
 			
-	_subscribers[_currentState] = sopravvissuti
+	_subscribers[_currentState] = subs_alive

@@ -4,36 +4,37 @@ extends Node2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var area: Area2D = $Area2D
+@onready var collision_node = $Area2D/CollisionShape2D
+var menu_scena = load("res://classes/ui/menu/popup_menu.tscn")
 
 var option_menu: Dictionary = {}
 var menu_istanza = null
-var menu_scena = load("res://classes/ui/menu/popup_menu.tscn")
-@onready var collision_node = $Area2D/CollisionShape2D
+var mappa_rect = null
 
-func sub(context):
+
+
+
+func sub(context) -> void:
 	if context is InputEventMouseButton and context.pressed and context.button_index == MOUSE_BUTTON_LEFT:
+
+		if mappa_rect and mappa_rect.open_menu != null and mappa_rect.open_menu.visible:
+			# Se c'è già un menu aperto, non fare nulla e blocca l'esecuzione qui
+			return
 		
-		# Chiediamo direttamente all'Area2D se il mouse globale è dentro il suo perimetro fisico
-		if area.has_overlapping_areas() or area.get_overlapping_bodies() or Input.is_action_just_pressed("ui_accept") or true:
-			
-			# Questo metodo nativo di Godot calcola la collisione esatta nel mondo di gioco
-			# tenendo conto di telecamera, offset, scale e posizioni sulla mappa.
-			var query = PhysicsPointQueryParameters2D.new()
-			query.position = context.global_position
-			query.collide_with_areas = true
-			
-			var hits = get_world_2d().direct_space_state.intersect_point(query)
-			
-			for hit in hits:
-				if hit.collider == area:
-					
-					_on_mouse_click()
-					if get_viewport():
-						get_viewport().set_input_as_handled()
-					return
-					
-					
+		
+		var dimensione = collision_node.shape.size * global_scale
+		var area_rect = Rect2(global_position - (dimensione / 2), dimensione)
+		var mouse_pos = context.global_position
+		if area_rect.has_point(mouse_pos):
+			_on_mouse_click()
+			mappa_rect.open_menu = menu_istanza
+			mappa_rect.menu_shape = menu_istanza.get_node("SfondoMenu").get_global_rect()
+
 func _ready() -> void:
+	mappa_rect = get_tree().get_first_node_in_group("world_map") as TextureRect
+	if (mappa_rect == null):
+		print("errore mappa non caricata")
+		return
 	area.mouse_entered.connect(_on_mouse_entered)
 	area.mouse_exited.connect(_on_mouse_exited)
 	_setup()
@@ -44,16 +45,15 @@ func _setup() -> void:
 	
 func _on_mouse_click() -> void:
 	if menu_istanza != null:
-		if (menu_istanza.visible):
-			menu_istanza.visible = false
-		elif (!menu_istanza.visible):
+		if (!menu_istanza.visible):
 			menu_istanza.visible = true
 	else:
-		
+		print("sto istanziando menu istanza")
 		menu_istanza = menu_scena.instantiate() 
 		menu_istanza._on_instance(option_menu)
-		get_tree().root.add_child(menu_istanza)
-		menu_istanza.global_position = get_global_mouse_position()
+		add_child(menu_istanza)
+		menu_istanza.position = Vector2.ZERO # Oppure Vector2(50, 0) per spostarlo un po'
+
 
 		
 	
