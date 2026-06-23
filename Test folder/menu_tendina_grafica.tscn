@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bv7qb6rtmf6d0"]
 
-[ext_resource type="StyleBox" uid="uid://yo8sl8cft5p1" path="res://style/FF7Button.tres" id="1_ygn1h"]
-[ext_resource type="StyleBox" uid="uid://mdk1rivvts73" path="res://style/PressedButton.tres" id="2_0kqdd"]
-[ext_resource type="StyleBox" uid="uid://bipcs04h6m5kn" path="res://style/HoverButton.tres" id="3_mxpxc"]
+[ext_resource type="StyleBox" uid="uid://yo8sl8cft5p1" path="res://resources/style/FF7Button.tres" id="1_ygn1h"]
+[ext_resource type="StyleBox" uid="uid://mdk1rivvts73" path="res://resources/style/PressedButton.tres" id="2_0kqdd"]
+[ext_resource type="StyleBox" uid="uid://bipcs04h6m5kn" path="res://resources/style/HoverButton.tres" id="3_mxpxc"]
 
 [node name="MenuTendinaGrafica" type="Control" unique_id=279312385]
 layout_mode = 3

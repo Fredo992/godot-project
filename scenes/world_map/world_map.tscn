@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cf43qjupgcb6j"]
+
+[ext_resource type="Script" uid="uid://broyevkux8eum" path="res://scenes/world_map/map_generator.gd" id="1_i1wog"]
+[ext_resource type="Script" uid="uid://bnckkgl1h60mf" path="res://scenes/world_map/world_map.gd" id="2_kvdqv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wijl4"]
+load_path = "res://.godot/imported/ChatGPT Image Jun 4, 2026, 03_48_28 PM.png-15fa94ab13cb2ac36ccfe121d4f21c55.ctex"
+
+[node name="Map" type="Node2D" unique_id=1446147403]
+script = ExtResource("1_i1wog")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2011711174]
+texture_filter = 1
+offset_right = 995.0
+offset_bottom = 1580.0
+mouse_filter = 2
+texture = SubResource("CompressedTexture2D_wijl4")
+script = ExtResource("2_kvdqv")

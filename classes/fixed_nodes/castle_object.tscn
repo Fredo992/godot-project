@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://dvtqta5nrc2mx"]
-
-[ext_resource type="PackedScene" uid="uid://unmgdielofxt" path="res://map_object.tscn" id="1_eef2v"]
-[ext_resource type="Script" uid="uid://btrisrnu7rh35" path="res://classes/fixed_nodes/castl_object.gd" id="2_tbaeu"]
-
-[node name="Map_object" unique_id=111385838 instance=ExtResource("1_eef2v")]
-script = ExtResource("2_tbaeu")

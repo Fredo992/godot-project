@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ch0xftrkvqej6"]
+
+[ext_resource type="Script" uid="uid://dwffq3uuq8o5q" path="res://scenes/ui/menu/popup_menu.gd" id="1_3kyxu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxb7q"]
+bg_color = Color(0.13333334, 0.15294118, 0.18039216, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="PopupMenu" type="Control" unique_id=1938114436 node_paths=PackedStringArray("options_container")]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3kyxu")
+options_container = NodePath("SfondoMenu/OptionsContainer")
+
+[node name="SfondoMenu" type="PanelContainer" parent="." unique_id=2062240435]
+layout_direction = 2
+layout_mode = 0
+offset_right = 37.0
+offset_bottom = 34.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sxb7q")
+
+[node name="OptionsContainer" type="VBoxContainer" parent="SfondoMenu" unique_id=9488895]
+layout_mode = 2
+mouse_filter = 2
