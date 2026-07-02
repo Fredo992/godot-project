@@ -29,5 +29,4 @@ func load_folder(folder_name: String) -> Dictionary:
 						
 			file_name = directory.get_next()
 	
-	print(sprites.keys())
 	return sprites
