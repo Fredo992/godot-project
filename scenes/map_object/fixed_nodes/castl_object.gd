@@ -8,4 +8,5 @@ func _setup() -> void:
 	"entra": func(): print("sono entrato al castello "),
 	"combatti ": func(): print("stai combattendo il re matto"),
 	"esci": func(): print("sono uscito dal castello "),
+	"blabblo": func(): print("questa è la funzione nuova")
 })

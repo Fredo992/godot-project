@@ -14,9 +14,7 @@ func _get_random_scenes():
 func _ready():
 	fixed_nodes = load_folder("res://scenes/map_object/fixed_nodes")
 	random_nodes = load_folder("res://scenes/map_object/random_nodes")
-	
-	print({"Indirizzo logico (hash): ": hash(fixed_nodes)})
-	print("scenes from folder \"scenes/fixed_nodes\" \"scenes/random_nodes\" has been loaded ")
+
 
 
 func load_folder(folder_name: String) -> Dictionary:
@@ -34,5 +32,5 @@ func load_folder(folder_name: String) -> Dictionary:
 						
 			file_name = directory.get_next()
 	
-	print(scenes.keys())
+	#print(scenes.keys())
 	return scenes

@@ -11,7 +11,6 @@ func _ready():
 	if(fixed_sprites.is_empty() && random_sprites.is_empty()):
 		print("sprites folders are empty!!!")
 		return
-	print("sprites from folder \"sprites/map nodes/fixed\" \"sprites/map nodes/random\" has been loaded ")
 
 
 func load_folder(folder_name: String) -> Dictionary:
