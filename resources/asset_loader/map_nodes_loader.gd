@@ -17,7 +17,6 @@ func _ready():
 	#---
 	print("Running: map_nodes_loader")
 	test_scan(ROOT)
-
 	
 	
 

@@ -2,7 +2,8 @@ extends MapObject
 
 
 func _setup() -> void:
-	sprite.texture = SpritesLoader.fixed_sprites["place_holder_shop.png"]
+	sprite.texture = JsonWriter.path_dictionary["fixed"][0]
+	sprite.texture = JsonWriter.fixed_sprites["fixed"][0]
 	_setup_options_menu({
 	"entra": func(): print("sono entrato allo shop  "),
 	"compra ": func(): print("compra qualcosa si "),

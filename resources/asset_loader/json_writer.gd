@@ -4,7 +4,7 @@ extends Node
 const ROOT = "res://"
 const folders_to_ignore = ["asset_loader"]
 var valid_extensions = ["png", "jpg", "jpeg", "tscn", "tres", "txt"]
-var path_dictionary: Dictionary = {}
+var path_dictionary: Dictionary[String, Array] = {}
 
 func _ready():
 	test_scan(ROOT)

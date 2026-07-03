@@ -20,6 +20,17 @@ func getEntityPositionsOnX(number_of_entities, entity_y):
 		entity_positions.append(Vector2(entity_x, entity_y))
 	return entity_positions
 
+
+func castToPackedScenes(dictionary: Dictionary, key: String):
+	var scene_array: Array[PackedScene] = []
+	for file_name in dictionary[key]:
+		var path = "res://" + str(key) + "/" + file_name # O ricostruisci il path corretto
+		var scene = load(path)
+		if scene is PackedScene:
+			scene_array.append(scene)
+	return scene_array
+
+
 func makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 	var instance = scene.instantiate()
 	add_child(instance)
@@ -31,21 +42,21 @@ func makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 func _ready():	
 	InputManager.subscribe_click_ui(_unhandled_input)
 	space_between_rows = getRowsSpacing(number_of_rows)
-	fixed_scenes = MapNodesLoader.fixed_nodes
-	random_scenes = MapNodesLoader.random_nodes
+	fixed_scenes = castToPackedScenes(JsonWriter.path_dictionary, "fixed_nodes")
+	random_scenes =  castToPackedScenes(JsonWriter.path_dictionary, "random_nodes")
 	for i in range(number_of_rows):
 		if (i == 0):
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))
-			makeInstanceOfScene(fixed_scenes["castle_object.tscn"], positions[0])
+			makeInstanceOfScene(fixed_scenes[0], positions[0])
 		elif (i == number_of_rows -1):
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))
-			makeInstanceOfScene(fixed_scenes["castle_object.tscn"], positions[0])
+			makeInstanceOfScene(fixed_scenes[0], positions[0])
 		elif (i%4 == 0):
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))
-			makeInstanceOfScene(fixed_scenes["shop_object.tscn"], positions[0])
+			makeInstanceOfScene(fixed_scenes[1], positions[0])
 		else:
 			for entity_pos in getEntityPositionsOnX(randi_range(1,3), (space_between_rows * (i+1))):
-				makeInstanceOfScene(random_scenes[random_scenes.keys().pick_random()], entity_pos)
+				makeInstanceOfScene(random_scenes[randi_range(0,random_scenes.size())], entity_pos)
 
 
 var trascinamento_attivo: bool = false

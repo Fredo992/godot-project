@@ -3,7 +3,7 @@ extends MapObject
 
 
 func _setup() -> void:
-	sprite.texture = SpritesLoader.fixed_sprites["place_holder_castle.png"]
+	sprite.texture = JsonWriter.path_dictionary["fixed"][0]
 	_setup_options_menu({
 	"entra": func(): print("sono entrato al castello "),
 	"combatti ": func(): print("stai combattendo il re matto"),
