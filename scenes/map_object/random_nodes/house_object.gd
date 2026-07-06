@@ -3,7 +3,10 @@ extends MapObject
 
 
 func _setup() -> void:
-	sprite.texture = JsonWriter.path_dictionary["random"][2]
+	var path = JsonWriter.path_dictionary["random"][2]
+	var resource = load(path)
+	var texture: Texture2D = resource as Texture2D
+	sprite.texture = texture
 	_setup_options_menu({
 	"entra": func(): print("sono entrato al villaggio "),
 	"riposati": func(): print("ronf ronf ronf ronf zzzz"),

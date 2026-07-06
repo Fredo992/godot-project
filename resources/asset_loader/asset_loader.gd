@@ -11,7 +11,7 @@ func _ready():
 	print("--- Asset Loader Caricato ---")
 	# Facciamo un print carino per vedere la struttura
 	for key in path_dictionary:
-		print(key, ": ", path_dictionary[key])
+		print(key + ": " + str(path_dictionary[key].size()))
 
 func test_scan(path: String):
 
@@ -20,11 +20,9 @@ func test_scan(path: String):
 
 	pointer.list_dir_begin()
 	
-	# Usiamo il path pulito come chiave (es: "map_nodes/fixed")
-	# È unico per definizione, addio collisioni.
-	var base_key = pointer.get_current_dir().get_file()
+	var folder_name = pointer.get_current_dir().get_file()
 	
-	
+
 	var file_name = pointer.get_next()
 	
 	while file_name != "":
@@ -43,9 +41,9 @@ func test_scan(path: String):
 		else:
 			var ext = file_name.get_extension().to_lower()
 			if valid_extensions.has(ext):
-				if not path_dictionary.has(base_key):
-					path_dictionary[base_key] = []
-				path_dictionary[base_key].append(file_name)
+				if not path_dictionary.has(folder_name):
+					path_dictionary[folder_name] = []
+				path_dictionary[folder_name].append(current_path)
 		
 		file_name = pointer.get_next()
 		

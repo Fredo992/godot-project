@@ -7,8 +7,8 @@ var fixed_scenes
 var random_scenes
 var space_between_rows
 
-func getRowsSpacing(number_of_rows):
-	return screen_height / (number_of_rows + 1)
+func getRowsSpacing(rows):
+	return screen_height / (rows + 1)
 
 	
 func getEntityPositionsOnX(number_of_entities, entity_y):
@@ -24,7 +24,7 @@ func getEntityPositionsOnX(number_of_entities, entity_y):
 func castToPackedScenes(dictionary: Dictionary, key: String):
 	var scene_array: Array[PackedScene] = []
 	for file_name in dictionary[key]:
-		var path = "res://" + str(key) + "/" + file_name # O ricostruisci il path corretto
+		var path = file_name
 		var scene = load(path)
 		if scene is PackedScene:
 			scene_array.append(scene)
@@ -56,7 +56,7 @@ func _ready():
 			makeInstanceOfScene(fixed_scenes[1], positions[0])
 		else:
 			for entity_pos in getEntityPositionsOnX(randi_range(1,3), (space_between_rows * (i+1))):
-				makeInstanceOfScene(random_scenes[randi_range(0,random_scenes.size())], entity_pos)
+				makeInstanceOfScene(random_scenes[randi_range(1,random_scenes.size())-1], entity_pos)
 
 
 var trascinamento_attivo: bool = false
