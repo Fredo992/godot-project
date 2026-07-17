@@ -1,0 +1,1 @@
+Questo è un gioco sviluppato in godot sritto prevalentemente in gdscript, l'obiettivo è un gioco rogue like, stile slay the spire, dove la mappa viene generata casualmente ad ogni partita, riempiendola di nodi che hanno funzionalità proprie in base al tipo di nodo
