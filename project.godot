@@ -15,10 +15,9 @@ config/features=PackedStringArray("4.6", "Mobile")
 
 [autoload]
 
-MapNodesLoader="*uid://djorrsaeo10kr"
-SpritesLoader="*uid://bo5lx67oel5hh"
 InputManager="*uid://becpnfcuy4xug"
 WorldMap="*uid://bnckkgl1h60mf"
+JsonWriter="*uid://b4m0axn51tswh"
 
 [display]
 
