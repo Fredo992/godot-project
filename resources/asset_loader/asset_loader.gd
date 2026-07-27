@@ -6,6 +6,13 @@ const folders_to_ignore = ["asset_loader"]
 var valid_extensions = ["png", "jpg", "jpeg", "tscn", "tres", "txt"]
 var path_dictionary: Dictionary[String, Array] = {}
 
+
+func _get_resource(key: String):
+	if(path_dictionary.keys().has(key)):
+		return path_dictionary[key]
+	
+
+
 func _ready():
 	test_scan(ROOT)
 	print("--- Asset Loader Caricato ---")
