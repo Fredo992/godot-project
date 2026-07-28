@@ -5,7 +5,8 @@ const ROOT = "res://"
 const folders_to_ignore = ["asset_loader"]
 var valid_extensions = ["png", "jpg", "jpeg", "tscn", "tres", "txt"]
 var path_dictionary: Dictionary[String, Array] = {}
-
+var file_dictionary: Dictionary[String, String]
+var path_dictionary2: Dictionary[String, File_dictionary] = {}
 
 func _get_resource(key: String):
 	if(path_dictionary.keys().has(key)):
@@ -14,14 +15,15 @@ func _get_resource(key: String):
 
 
 func _ready():
+	
 	test_scan(ROOT)
 	print("--- Asset Loader Caricato ---")
-	# Facciamo un print carino per vedere la struttura
-	for key in path_dictionary:
-		print(key + ": " + str(path_dictionary[key].size()))
+	print(path_dictionary2["old"])
 
 func test_scan(path: String):
-
+	
+	
+	
 	var pointer = DirAccess.open(path)
 	if not pointer: return
 
@@ -48,9 +50,19 @@ func test_scan(path: String):
 		else:
 			var ext = file_name.get_extension().to_lower()
 			if valid_extensions.has(ext):
+				if(!path_dictionary2.keys().has(folder_name)):
+					path_dictionary2[folder_name] = File_dictionary.new()
+					print(folder_name)
+					print(path_dictionary2[folder_name])
+				
+				if(!path_dictionary2[folder_name].folder_dictionary.keys().has(file_name)):
+					path_dictionary2[folder_name].folder_dictionary[file_name] = current_path
+				
 				if not path_dictionary.has(folder_name):
 					path_dictionary[folder_name] = []
 				path_dictionary[folder_name].append(current_path)
+				
+				
 		
 		file_name = pointer.get_next()
 		
