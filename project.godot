@@ -17,7 +17,7 @@ config/features=PackedStringArray("4.7", "Mobile")
 
 InputManager="*uid://becpnfcuy4xug"
 WorldMap="*uid://bnckkgl1h60mf"
-JsonWriter="*uid://b4m0axn51tswh"
+AssetLoader="*uid://b4m0axn51tswh"
 
 [display]
 

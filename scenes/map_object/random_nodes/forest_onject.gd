@@ -3,7 +3,8 @@ extends MapObject
 
 
 func _setup() -> void:
-	var path = JsonWriter.path_dictionary["random"][1]
+	
+	var path = AssetLoader.get_file("random", "place_holder_forest.png")
 	var resource = load(path)
 	var texture: Texture2D = resource as Texture2D
 	sprite.texture = texture

@@ -4,33 +4,38 @@ extends Node
 const ROOT = "res://"
 const folders_to_ignore = ["asset_loader"]
 var valid_extensions = ["png", "jpg", "jpeg", "tscn", "tres", "txt"]
-var path_dictionary: Dictionary[String, Array] = {}
-var file_dictionary: Dictionary[String, String]
-var path_dictionary2: Dictionary[String, File_dictionary] = {}
 
-func _get_resource(key: String):
-	if(path_dictionary.keys().has(key)):
-		return path_dictionary[key]
+var asset_dictionary: Dictionary[String, File_dictionary] = {}
+
+func are_key_invalid(folder_name_key: String, file_name_key:String):
+	return not asset_dictionary.keys().has(folder_name_key) || not asset_dictionary[folder_name_key].folder_dictionary.keys().has(file_name_key)
+
+func get_file(folder_name_key: String, file_name_key:String, expected_extention: String = "none"):
 	
+	if (expected_extention == "png"):
+		if (are_key_invalid(folder_name_key, file_name_key)):
+			return asset_dictionary["exceptions"].folder_dictionary["no_sprite_error.png"]
 
+	var fetch_file_path = asset_dictionary[folder_name_key].folder_dictionary[file_name_key]
+	if (expected_extention == "none"):
+		return fetch_file_path
+	
 
 func _ready():
 	
 	test_scan(ROOT)
 	print("--- Asset Loader Caricato ---")
-	print(path_dictionary2["old"])
+	print(asset_dictionary["random"])
 
 func test_scan(path: String):
 	
-	
-	
+
 	var pointer = DirAccess.open(path)
 	if not pointer: return
 
 	pointer.list_dir_begin()
 	
 	var folder_name = pointer.get_current_dir().get_file()
-	
 
 	var file_name = pointer.get_next()
 	
@@ -50,19 +55,12 @@ func test_scan(path: String):
 		else:
 			var ext = file_name.get_extension().to_lower()
 			if valid_extensions.has(ext):
-				if(!path_dictionary2.keys().has(folder_name)):
-					path_dictionary2[folder_name] = File_dictionary.new()
-					print(folder_name)
-					print(path_dictionary2[folder_name])
-				
-				if(!path_dictionary2[folder_name].folder_dictionary.keys().has(file_name)):
-					path_dictionary2[folder_name].folder_dictionary[file_name] = current_path
-				
-				if not path_dictionary.has(folder_name):
-					path_dictionary[folder_name] = []
-				path_dictionary[folder_name].append(current_path)
-				
-				
+				if(!asset_dictionary.keys().has(folder_name)):
+					asset_dictionary[folder_name] = File_dictionary.new()
+
+				if(!asset_dictionary[folder_name].folder_dictionary.keys().has(file_name)):
+					asset_dictionary[folder_name].add_file(file_name, current_path)
+					#asset_dictionary[folder_name].folder_dictionary[file_name] = current_path			
 		
 		file_name = pointer.get_next()
 		
