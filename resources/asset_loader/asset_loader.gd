@@ -3,7 +3,10 @@ extends Node
 
 const ROOT = "res://"
 const folders_to_ignore = ["asset_loader"]
-var valid_extensions = ["png", "jpg", "jpeg", "tscn", "tres", "txt"]
+const valid_extensions = ["png", "jpg", "jpeg", "tscn", "tres", "txt"]
+
+
+
 
 var asset_dictionary: Dictionary[String, File_dictionary] = {}
 
@@ -12,9 +15,15 @@ func are_key_invalid(folder_name_key: String, file_name_key:String):
 
 func get_file(folder_name_key: String, file_name_key:String, expected_extention: String = "none"):
 	
-	if (expected_extention == "png"):
-		if (are_key_invalid(folder_name_key, file_name_key)):
-			return asset_dictionary["exceptions"].folder_dictionary["no_sprite_error.png"]
+	match expected_extention.to_lower():
+		"":
+			return # Equivale a 'none' (stringa vuota)
+		"png":
+			if (are_key_invalid(folder_name_key, file_name_key)):
+				return asset_dictionary["exceptions"].folder_dictionary["no_sprite_error.png"]
+		_:
+		# Il trattino basso '_' è il caso di fallback (default)
+			pass
 
 	var fetch_file_path = asset_dictionary[folder_name_key].folder_dictionary[file_name_key]
 	if (expected_extention == "none"):
@@ -60,7 +69,6 @@ func test_scan(path: String):
 
 				if(!asset_dictionary[folder_name].folder_dictionary.keys().has(file_name)):
 					asset_dictionary[folder_name].add_file(file_name, current_path)
-					#asset_dictionary[folder_name].folder_dictionary[file_name] = current_path			
 		
 		file_name = pointer.get_next()
 		

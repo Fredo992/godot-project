@@ -21,10 +21,10 @@ func getEntityPositionsOnX(number_of_entities, entity_y):
 	return entity_positions
 
 
-func castToPackedScenes(dictionary: Dictionary, key: String):
-	var folder_dictionary:File_dictionary = dictionary[key]
+func castToPackedScenes(asset_dictionary: Dictionary, key: String):
+	var file_dictionary:File_dictionary = asset_dictionary[key]
 	var scene_array: Array[PackedScene] = []
-	for value in folder_dictionary.folder_dictionary.values():
+	for value in file_dictionary.folder_dictionary.values():
 		var path = value
 		var scene = load(path)
 		if scene is PackedScene:
@@ -56,7 +56,7 @@ func _ready():
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))
 			makeInstanceOfScene(fixed_scenes[1], positions[0])
 		else:
-			for entity_pos in getEntityPositionsOnX(randi_range(1,3), (space_between_rows * (i+1))):
+			for entity_pos in getEntityPositionsOnX(randi_range(1,4), (space_between_rows * (i+1))):
 				makeInstanceOfScene(random_scenes[randi_range(1,random_scenes.size())-1], entity_pos)
 
 
@@ -76,8 +76,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Usiamo la posizione assoluta del mouse meno l'offset calcolato al click
 		# Questo garantisce che la mappa segua il mouse senza usare il "relative"
 		position.y = event.position.y - offset_y
-		
-	
 		
 		# Controllo superiore
 		if position.y >= 0:
