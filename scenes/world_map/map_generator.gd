@@ -3,8 +3,6 @@ extends Node2D
 
 var number_of_rows = 16
 var screen_height = 1040
-var fixed_scenes
-var random_scenes
 var space_between_rows
 
 func getRowsSpacing(rows):
@@ -43,8 +41,9 @@ func makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 func _ready():	
 	InputManager.subscribe_click_ui(_unhandled_input)
 	space_between_rows = getRowsSpacing(number_of_rows)
-	fixed_scenes = castToPackedScenes(AssetLoader.asset_dictionary, "fixed_nodes")
-	random_scenes =  castToPackedScenes(AssetLoader.asset_dictionary, "random_nodes")
+	var fixed_scenes = castToPackedScenes(AssetLoader.asset_dictionary, "fixed_nodes")
+	var random_scenes =  castToPackedScenes(AssetLoader.asset_dictionary, "random_nodes")
+	
 	for i in range(number_of_rows):
 		if (i == 0):
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))

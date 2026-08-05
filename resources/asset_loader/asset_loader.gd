@@ -14,16 +14,19 @@ func are_key_invalid(folder_name_key: String, file_name_key:String):
 	return not asset_dictionary.keys().has(folder_name_key) || not asset_dictionary[folder_name_key].folder_dictionary.keys().has(file_name_key)
 
 func get_file(folder_name_key: String, file_name_key:String, expected_extention: String = "none"):
+	if(expected_extention != "none"):
+		assert(valid_extensions.has(expected_extention), "invalid extention: " + editor_description + " for method get_file in AssetLoader")
 	
 	match expected_extention.to_lower():
-		"":
-			return # Equivale a 'none' (stringa vuota)
+		"none":
+			pass
 		"png":
 			if (are_key_invalid(folder_name_key, file_name_key)):
 				return asset_dictionary["exceptions"].folder_dictionary["no_sprite_error.png"]
-		_:
-		# Il trattino basso '_' è il caso di fallback (default)
-			pass
+		"tscn":
+			if (are_key_invalid(folder_name_key, file_name_key)):
+				return asset_dictionary["exceptions"].folder_dictionary["fallbackNode.tscn"]
+
 
 	var fetch_file_path = asset_dictionary[folder_name_key].folder_dictionary[file_name_key]
 	if (expected_extention == "none"):
@@ -34,7 +37,7 @@ func _ready():
 	
 	test_scan(ROOT)
 	print("--- Asset Loader Caricato ---")
-	print(asset_dictionary["random"])
+	print(asset_dictionary["exceptions"])
 
 func test_scan(path: String):
 	
