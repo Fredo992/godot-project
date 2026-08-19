@@ -2,3 +2,4 @@ Questo è un gioco sviluppato in godot scritto prevalentemente in gdscript, l'ob
 
 - Il gioco carica le risorse tramite L'asset loader presente nel branch manifestbuilder ( nome da cambiare, l'idea iniziale era catalogare i percorsi delle risorse in un json )
 - il gioco genera degli oggetti della mappa, che ereditano la logica da un padre ma ognuno dei figli implementa il proprio menù tramite un dictionary[String, Funzione]
+  - il menù è istanziato al momento del click, farà parte di una cache in modo da poterne alloccare 1 solo in memoria ed è dinamico, si riempe di bottoni in base al numero di record del dictionary
