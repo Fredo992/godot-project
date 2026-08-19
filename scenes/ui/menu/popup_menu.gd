@@ -1,8 +1,10 @@
-extends Control
 
-var button_style_normal = preload("res://resources/style/FF7Button.tres")
-var button_style_hover = preload("res://resources/style/HoverButton.tres")
-var button_style_pressed = preload("res://resources/style/PressedButton.tres")
+class_name MyPopupMenu extends Control
+
+var menu_rect: Rect2
+var button_style_normal = AssetLoader.get_resource("style", "FF7Button.tres", "tres")
+var button_style_hover =  AssetLoader.get_resource("style", "HoverButton.tres", "tres")
+var button_style_pressed =  AssetLoader.get_resource("style", "PressedButton.tres", "tres")
 @export var options_container: Control 
 
 func _on_instance(options: Dictionary[String, Callable]):
@@ -14,6 +16,15 @@ func _on_instance(options: Dictionary[String, Callable]):
 		_setup_button_behavior(newButton, key, options[key])
 		options_container.add_child(newButton)
 		
+	var size = $SfondoMenu/OptionsContainer.get_combined_minimum_size()
+	menu_rect = Rect2($SfondoMenu/OptionsContainer.global_position, size)
+	
+#to debug visually
+#func _draw() -> void:
+	#if menu_rect:
+		#var local_rect = Rect2(menu_rect.position - global_position, menu_rect.size)
+		#draw_rect(local_rect, Color(1.0, 0.0, 0.0, 0.3), true)
+		#draw_rect(local_rect, Color(1.0, 0.0, 0.0, 1.0), false, 2.0)
 
 func _setup_button_behavior(button: Button, text: String, behavior: Callable):
 	button.text = text
@@ -24,7 +35,7 @@ func _setup_button_behavior(button: Button, text: String, behavior: Callable):
 func _set_button_font(button: Button):
 	button.add_theme_font_size_override("font_size", 9)
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	
+
 func _set_button_styles(button: Button):
 	button.add_theme_stylebox_override("normal", button_style_normal)
 	button.add_theme_stylebox_override("hover", button_style_hover)

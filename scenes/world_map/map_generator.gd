@@ -3,8 +3,6 @@ extends Node2D
 
 var number_of_rows = 16
 var screen_height = 1040
-var fixed_scenes
-var random_scenes
 var space_between_rows
 
 func getRowsSpacing(rows):
@@ -21,10 +19,11 @@ func getEntityPositionsOnX(number_of_entities, entity_y):
 	return entity_positions
 
 
-func castToPackedScenes(dictionary: Dictionary, key: String):
+func castToPackedScenes(asset_dictionary: Dictionary, key: String):
+	var file_dictionary:File_dictionary = asset_dictionary[key]
 	var scene_array: Array[PackedScene] = []
-	for file_name in dictionary[key]:
-		var path = file_name
+	for value in file_dictionary.folder_dictionary.values():
+		var path = value
 		var scene = load(path)
 		if scene is PackedScene:
 			scene_array.append(scene)
@@ -42,8 +41,9 @@ func makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 func _ready():	
 	InputManager.subscribe_click_ui(_unhandled_input)
 	space_between_rows = getRowsSpacing(number_of_rows)
-	fixed_scenes = castToPackedScenes(JsonWriter.path_dictionary, "fixed_nodes")
-	random_scenes =  castToPackedScenes(JsonWriter.path_dictionary, "random_nodes")
+	var fixed_scenes = castToPackedScenes(AssetLoader.asset_dictionary, "fixed_nodes")
+	var random_scenes =  castToPackedScenes(AssetLoader.asset_dictionary, "random_nodes")
+	
 	for i in range(number_of_rows):
 		if (i == 0):
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))
@@ -55,7 +55,7 @@ func _ready():
 			var positions = getEntityPositionsOnX(1, (space_between_rows * (i+1)))
 			makeInstanceOfScene(fixed_scenes[1], positions[0])
 		else:
-			for entity_pos in getEntityPositionsOnX(randi_range(1,3), (space_between_rows * (i+1))):
+			for entity_pos in getEntityPositionsOnX(randi_range(1,4), (space_between_rows * (i+1))):
 				makeInstanceOfScene(random_scenes[randi_range(1,random_scenes.size())-1], entity_pos)
 
 
@@ -75,8 +75,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Usiamo la posizione assoluta del mouse meno l'offset calcolato al click
 		# Questo garantisce che la mappa segua il mouse senza usare il "relative"
 		position.y = event.position.y - offset_y
-		
-	
 		
 		# Controllo superiore
 		if position.y >= 0:
