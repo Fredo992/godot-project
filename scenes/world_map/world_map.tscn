@@ -10,6 +10,7 @@ load_path = "res://.godot/imported/ChatGPT Image Jun 4, 2026, 03_48_28 PM.png-15
 script = ExtResource("1_i1wog")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2011711174]
+visible = false
 texture_filter = 1
 offset_right = 995.0
 offset_bottom = 1580.0

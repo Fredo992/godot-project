@@ -15,5 +15,4 @@ func add_file(file_name_key:String, file_path:String):
 
 
 func _to_string() -> String:
-	# Esempio: restituisce la rappresentazione in stringa del dizionario intero
 	return str(folder_dictionary)
