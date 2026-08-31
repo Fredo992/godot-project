@@ -25,9 +25,6 @@ func _setup() -> void:
 func _on_mouse_click() -> void:
 	request_menu_open.emit(option_menu)
 
-	
-
-
 func _on_mouse_entered() -> void:
 	sprite.scale = Vector2(1.1, 1.1)
 

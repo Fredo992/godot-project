@@ -20,11 +20,11 @@ func _on_instance(options: Dictionary[String, Callable]):
 	menu_rect = Rect2($SfondoMenu/OptionsContainer.global_position, size)
 	
 #to debug visually
-#func _draw() -> void:
-	#if menu_rect:
-		#var local_rect = Rect2(menu_rect.position - global_position, menu_rect.size)
-		#draw_rect(local_rect, Color(1.0, 0.0, 0.0, 0.3), true)
-		#draw_rect(local_rect, Color(1.0, 0.0, 0.0, 1.0), false, 2.0)
+func _draw() -> void:
+	if menu_rect:
+		var local_rect = Rect2(menu_rect.position - global_position, menu_rect.size)
+		draw_rect(local_rect, Color(1.0, 0.0, 0.0, 0.3), true)
+		draw_rect(local_rect, Color(1.0, 0.0, 0.0, 1.0), false, 2.0)
 
 func _setup_button_behavior(button: Button, text: String, behavior: Callable):
 	button.text = text
