@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ceiqv181lefjs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1q6ml"]
+bg_color = Color(0.7019608, 0.8980392, 0.9882353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e60bc"]
+bg_color = Color(0.16862746, 0.47843137, 0.62352943, 1)
+
+[node name="Ability_bar" type="VBoxContainer" unique_id=1302797678]
+propagate_maximum_size = false
+theme_override_constants/separation = 0
+
+[node name="Button" type="Button" parent="." unique_id=2035854418]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Calcio
+"
+alignment = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=878899535]
+custom_minimum_size = Vector2(0, 6)
+custom_maximum_size = Vector2(-1, 10)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+theme_override_styles/background = SubResource("StyleBoxFlat_1q6ml")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e60bc")

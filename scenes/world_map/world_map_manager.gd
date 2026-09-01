@@ -4,17 +4,18 @@ extends Control
 var visible_rows = 5
 var open_menu: MyPopupMenu
 var menu_shape: Rect2
+var map_cache: Array[Node]
+
 
 func _ready() -> void:
 	var screen_heigth = get_viewport().get_visible_rect().size.y
 	var screen_width = get_viewport().get_visible_rect().size.x
 	var total_map_height = screen_heigth * visible_rows
 	var map_generator = MapGenerator.new(total_map_height, screen_width)
-	var map_cache = map_generator._generate_map()
+	map_cache = map_generator._generate_map()
 	for node: MapObject in map_cache:
 		node.request_menu_open.connect(_on_menu_requested)
 		add_child(node)
-		
 
 
 func _on_menu_requested(option_menu) -> void:

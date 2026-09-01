@@ -53,7 +53,7 @@ func get_file(folder_name_key: String, file_name_key:String, expected_extention:
 func _ready():
 	load_folders(ROOT)
 	print("--- Asset Loader Caricato ---")
-	print(asset_dictionary["menu"])
+	print(asset_dictionary["character"])
 
 func load_folders(path: String):
 	var pointer = DirAccess.open(path)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bpmb035ur7dof"]
+
+[node name="Interactive_label" type="Button" unique_id=463739899]
+theme_override_font_sizes/font_size = 14
+text = "STAT FORZA 10"
+alignment = 0
