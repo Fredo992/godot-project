@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://c2ee3mioim7dy"]
 
+[ext_resource type="Script" uid="uid://c58fvip0s2a33" path="res://scenes/ui/character/inventory/roaster.gd" id="1_k255t"]
 [ext_resource type="Texture2D" uid="uid://bcgqv4f6h4wmf" path="res://resources/sprites/ui elements/arrow.png" id="1_oqho6"]
 [ext_resource type="Texture2D" uid="uid://c21gd5khbhkkb" path="res://resources/sprites/characters/goblin.png" id="2_k255t"]
 [ext_resource type="PackedScene" uid="uid://bpmb035ur7dof" path="res://scenes/ui/character/ui_elements/interactive_label.tscn" id="3_fpfhf"]
 [ext_resource type="PackedScene" uid="uid://ceiqv181lefjs" path="res://scenes/ui/character/ui_elements/ability_bar.tscn" id="4_gfvdy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd3fp"]
+bg_color = Color(0.17285058, 0.67739516, 0.6953997, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_axvqn"]
 color = Color(0.65882355, 0.8352941, 1, 1)
@@ -25,6 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_k255t")
 
 [node name="Panel" type="Panel" parent="." unique_id=1486322972]
 layout_mode = 1
@@ -33,6 +38,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_cd3fp")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2144440135]
 layout_mode = 1
@@ -242,3 +249,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "TESTA: ELMO INCREDIBILE"
 alignment = 0
+
+[node name="Button" type="Button" parent="." unique_id=336146469]
+z_index = 1
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 31.0
+text = "EXIT
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed_exit"]

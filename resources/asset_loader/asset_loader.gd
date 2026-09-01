@@ -9,6 +9,15 @@ var asset_dictionary: Dictionary[String, File_dictionary] = {}
 
 var resource_cache: Dictionary[String, Resource] = {}
 
+func _ready():
+	load_folders(ROOT)
+	print("--- Asset Loader Caricato ---")
+	print(asset_dictionary["world_map"])
+	print(asset_dictionary["character"])
+
+
+
+
 func get_resource(folder_name_key: String, file_name_key: String, expected_extention: String = "none") -> Resource:
 	var path = get_file(folder_name_key, file_name_key, expected_extention)  
 	if not resource_cache.has(path):
@@ -50,10 +59,6 @@ func get_file(folder_name_key: String, file_name_key:String, expected_extention:
 		
 
 
-func _ready():
-	load_folders(ROOT)
-	print("--- Asset Loader Caricato ---")
-	print(asset_dictionary["character"])
 
 func load_folders(path: String):
 	var pointer = DirAccess.open(path)

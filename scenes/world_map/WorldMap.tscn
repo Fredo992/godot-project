@@ -83,3 +83,5 @@ text = "Diary
 anchor_mode = 0
 drag_vertical_enabled = true
 script = ExtResource("6_ig6v8")
+
+[connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/Button" to="." method="_on_button_pressed_roaster"]

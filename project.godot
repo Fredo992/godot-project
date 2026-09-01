@@ -18,12 +18,12 @@ config/features=PackedStringArray("4.7", "Mobile")
 
 AssetLoader="*uid://b4m0axn51tswh"
 WorldMapManager="*uid://fmkqymhui2fo"
+GameManager="*uid://dijfq61n3yuch"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [dotnet]
