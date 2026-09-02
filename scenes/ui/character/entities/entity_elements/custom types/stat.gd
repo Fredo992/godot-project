@@ -6,6 +6,10 @@ var final_value: int
 
 @export var base_value: int = 1
 
+func _init(_base_value: int = 1):
+	base_value = _base_value
+
+
 var modifiers: Dictionary[GameConstants.stat_modifier, Array] = {
 	GameConstants.stat_modifier.FLAT: [] as Array[int],
 	GameConstants.stat_modifier.MULT: [] as Array[float]

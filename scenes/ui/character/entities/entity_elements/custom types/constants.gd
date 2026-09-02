@@ -8,6 +8,8 @@ enum stat_modifier{
 
 
 enum statName{
+	HP,
+	MANA,
 	STR,
 	DEX,
 	CON,

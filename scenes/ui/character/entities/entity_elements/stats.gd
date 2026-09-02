@@ -5,6 +5,8 @@ class_name CharacterStat
 const StatName = GameConstants.statName
 
 @export var character_stats: Dictionary[GameConstants.statName , Stat] = {
+	StatName.HP: Stat.new(10),
+	StatName.MANA: Stat.new(10),
 	StatName.STR: Stat.new(),
 	StatName.DEX: Stat.new(),
 	StatName.CON: Stat.new(),
