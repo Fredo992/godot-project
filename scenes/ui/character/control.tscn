@@ -1,7 +1,10 @@
-[gd_scene format=3 uid="uid://bvax0dhh6i8bn"]
+[gd_scene format=3 uid="uid://crd4qkgk6rxcl"]
 
-[ext_resource type="Script" uid="uid://y27ofh8ur1tq" path="res://scenes/ui/character/PlayerMenu.gd" id="1_3yvhp"]
 [ext_resource type="Texture2D" uid="uid://c21gd5khbhkkb" path="res://resources/sprites/characters/goblin.png" id="2_xmxgn"]
+
+[sub_resource type="GDScript" id="GDScript_3yvhp"]
+script/source = "extends Control
+"
 
 [node name="Control" type="Control" unique_id=1324355192]
 layout_mode = 3
@@ -10,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_3yvhp")
+script = SubResource("GDScript_3yvhp")
 
 [node name="Panel" type="Panel" parent="." unique_id=1885666302]
 layout_mode = 0
