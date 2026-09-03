@@ -1,6 +1,15 @@
 extends Object
 class_name GameConstants
 
+enum target_type{
+	SINGLE,
+	MULTI,
+	AREA,
+	GLOBAL
+}
+
+
+
 enum stat_modifier{
 	FLAT,
 	MULT
@@ -15,5 +24,7 @@ enum statName{
 	CON,
 	INT,
 	WIS,
-	CHA
+	CHA,
+	EXP,
+	JP
 }
