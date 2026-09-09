@@ -1,13 +1,14 @@
 class_name Stat
 extends Resource
 
-
+var stat_name: GameConstants.StatName
 var final_value: int 
-
 @export var base_value: int = 1
 
-func _init(_base_value: int = 1):
+func _init(_base_value: int = 1, _stat_name = GameConstants.StatName.NONE):
+	stat_name = _stat_name
 	base_value = _base_value
+	final_value = _base_value
 
 
 var modifiers: Dictionary[GameConstants.stat_modifier, Array] = {
@@ -42,5 +43,11 @@ func _is_equal(obj: Stat):
 		return false
 	return obj.base_value == base_value && obj.final_value == final_value
 	
+	
+func _is_equal_to_int(obj: int):
+	if not obj:
+		return false
+	return obj == base_value && obj == final_value
+	
 func _to_string() -> String:
-	return "Stat(Base: %d, Final: %d)" % [base_value, _get_final_value()]
+	return "%s: (Base: %d, Final: %d)" % [GameConstants.StatName.find_key(stat_name), base_value, _get_final_value()]

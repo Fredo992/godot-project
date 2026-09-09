@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="boh"
+run/main_scene="uid://crd4qkgk6rxcl"
 config/features=PackedStringArray("4.7", "Mobile")
 
 [autoload]
@@ -18,7 +19,7 @@ config/features=PackedStringArray("4.7", "Mobile")
 AssetLoader="*uid://b4m0axn51tswh"
 WorldMapManager="*uid://fmkqymhui2fo"
 GameManager="*uid://dijfq61n3yuch"
-StatTest="*uid://cbor65p8auat8"
+JobTest="*uid://bl78ybv2qlr5x"
 
 [display]
 
