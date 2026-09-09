@@ -45,4 +45,4 @@ func _spent_jp(amount: int):
 	jp_gain.base_value = 0
 	jp_gain._increment_base_value(amount)
 	var spent_jp = (jp_gain._get_final_value()) * -1
-	jp._increment_base_value(amount)
+	jp._increment_base_value(spent_jp)
