@@ -15,6 +15,7 @@ enum AbilityArgument{
 
 
 enum target_type{
+	NONE,
 	SINGLE,
 	MULTI,
 	AREA,
@@ -43,7 +44,8 @@ enum StatName{
 	CHA,
 	EXP,
 	EXP_COST,
+	JP_MODIFIERS,
 	JP,
 	JP_COST,
-	DAMAGE
+	AMOUNT
 }

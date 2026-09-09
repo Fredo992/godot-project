@@ -16,6 +16,9 @@ var modifiers: Dictionary[GameConstants.stat_modifier, Array] = {
 	GameConstants.stat_modifier.MULT: [] as Array[float]
 }
 
+func _increment_base_value(amount: int):
+	base_value += amount
+
 func _get_final_value() -> int:
 	var flat_result = 0
 	var mult_result = 0
