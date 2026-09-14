@@ -14,6 +14,7 @@ func _ready():
 	print("--- Asset Loader Caricato ---")
 	print(asset_dictionary["world_map"])
 	print(asset_dictionary["character"])
+	print("Memoria statica usata: ", Performance.get_monitor(Performance.MEMORY_STATIC) / 1024 / 1024, " MB")
 
 
 

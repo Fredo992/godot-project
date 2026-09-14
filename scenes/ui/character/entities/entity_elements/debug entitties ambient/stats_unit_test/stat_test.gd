@@ -1,7 +1,7 @@
 extends Node
 
 
-const StatName = GameConstants.statName
+const StatName = GameConstants.StatName
 const ModType = GameConstants.stat_modifier
 
 func _ready():

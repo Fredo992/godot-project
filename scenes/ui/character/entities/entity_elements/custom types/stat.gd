@@ -1,5 +1,5 @@
 class_name Stat
-extends Resource
+extends RefCounted
 
 var stat_name: GameConstants.StatName
 var final_value: int 
@@ -21,13 +21,13 @@ func _increment_base_value(amount: int):
 
 func _get_final_value() -> int:
 	var flat_result = 0
-	var mult_result = 0
+	var mult_result = 1
 	for mod in modifiers[GameConstants.stat_modifier.FLAT]:
 		flat_result += mod
 	for mod in modifiers[GameConstants.stat_modifier.MULT]:
 		if(mod != 0):
 			mult_result += mod
-	mult_result = 1 if mult_result == 0 else mult_result
+	mult_result = max(0.0, mult_result)
 	final_value = round((base_value + flat_result) * mult_result)
 	return final_value
 
