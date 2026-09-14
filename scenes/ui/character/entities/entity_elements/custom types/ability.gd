@@ -19,9 +19,8 @@ var to_implement: Callable = func(tar_type, amount: int = 0, num_of_targets: Arr
 		print("no implementation has been found")
 
 func _invoke_ability(num_of_targets: Array[AbstractEntity]):
-	print("AAAAAAAAAA")
-	print(amount_value)
-	to_implement.call(target_type, amount_value._get_final_value(), num_of_targets)
+
+	to_implement.call(target_type, amount_value.final_value, num_of_targets)
 	print(num_of_targets[0])
 
 func _to_string() -> String:

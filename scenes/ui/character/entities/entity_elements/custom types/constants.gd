@@ -31,6 +31,7 @@ enum stat_modifier{
 
 
 enum StatName{
+	SPEED,
 	NONE,
 	HP,
 	HP_COST,

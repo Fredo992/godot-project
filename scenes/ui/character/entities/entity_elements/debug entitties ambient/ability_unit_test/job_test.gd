@@ -15,4 +15,10 @@ func _ready() -> void:
 	var entity: AbstractEntity = AbstractEntity.new()
 	ability._invoke_ability([entity])
 	print(ability)
-	
+	var agility: Stat = Stat.new(10, GameConstants.StatName.DEX)
+	var derived_stat: DerivedStat = DerivedStat.new(GameConstants.StatName.SPEED, agility, func(agility): return agility * 2)
+	print("TEST STATISTICHE")
+	print(agility)
+	print(derived_stat)
+	agility._increment_base_value(10)
+	print(derived_stat)

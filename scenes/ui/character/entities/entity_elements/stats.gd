@@ -23,7 +23,7 @@ func _get_base_stat(stat_name: GameConstants.StatName):
 	return character_stats[stat_name]
 
 func _get_final_stat(stat_name: GameConstants.StatName):
-	return character_stats[stat_name]._get_final_value()
+	return character_stats[stat_name].final_value
 
 func _to_string() -> String:
 	var result = "CharacterStat: {\n"

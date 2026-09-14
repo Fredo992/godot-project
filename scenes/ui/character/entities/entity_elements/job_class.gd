@@ -29,7 +29,7 @@ func _get_available_abilities():
 
 func _unlock_ability(index: int, job_lvl_key: int):
 	var ability_cost = abilities[job_lvl_key][index].ability_jp_cost._get_final_value()
-	var current_jp = self.jp._get_final_value()
+	var current_jp = self.jp.final_value
 	if (current_jp >= ability_cost):
 		self._spent_jp(ability_cost)
 		abilities[job_lvl_key][index].is_ability_unlocked = true
@@ -51,7 +51,7 @@ func _to_string() -> String:
 func _gain_jp(amount: int):
 	jp_gain.base_value = 0
 	jp_gain._increment_base_value(amount)
-	var gained_jp = jp_gain._get_final_value()
+	var gained_jp = jp_gain.final_value
 	jp._increment_base_value(gained_jp)
 	jp_record._increment_base_value(gained_jp)
 	
@@ -59,5 +59,5 @@ func _gain_jp(amount: int):
 func _spent_jp(amount: int):
 	jp_gain.base_value = 0
 	jp_gain._increment_base_value(amount)
-	var spent_jp = (jp_gain._get_final_value()) * -1
+	var spent_jp = (jp_gain.final_value) * -1
 	jp._increment_base_value(spent_jp)
