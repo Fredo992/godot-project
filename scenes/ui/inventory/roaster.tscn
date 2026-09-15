@@ -1,0 +1,261 @@
+[gd_scene format=3 uid="uid://c2ee3mioim7dy"]
+
+[ext_resource type="Script" uid="uid://c58fvip0s2a33" path="res://scenes/ui/inventory/roaster.gd" id="1_k255t"]
+[ext_resource type="Texture2D" uid="uid://bcgqv4f6h4wmf" path="res://resources/sprites/ui elements/arrow.png" id="1_oqho6"]
+[ext_resource type="Texture2D" uid="uid://c21gd5khbhkkb" path="res://resources/sprites/characters/goblin.png" id="2_k255t"]
+[ext_resource type="PackedScene" uid="uid://bpmb035ur7dof" path="res://scenes/ui/inventory/ui elements/interactive_label.tscn" id="3_fpfhf"]
+[ext_resource type="PackedScene" uid="uid://ceiqv181lefjs" path="res://scenes/ui/inventory/ui elements/ability_bar.tscn" id="4_gfvdy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd3fp"]
+bg_color = Color(0.17285058, 0.67739516, 0.6953997, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_axvqn"]
+color = Color(0.65882355, 0.8352941, 1, 1)
+thickness = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_n8qc0"]
+color = Color(0.65882355, 0.8352941, 1, 1)
+thickness = 4
+vertical = true
+
+[sub_resource type="Theme" id="Theme_cw07g"]
+HScrollBar/styles/scroll = SubResource("StyleBoxLine_axvqn")
+VScrollBar/styles/scroll = SubResource("StyleBoxLine_n8qc0")
+
+[node name="Roaster" type="Control" unique_id=1083743681]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k255t")
+
+[node name="Panel" type="Panel" parent="." unique_id=1486322972]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_cd3fp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2144440135]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer" unique_id=755305751]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Panel/MarginContainer/HBoxContainer" unique_id=1914807566]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture_normal = ExtResource("1_oqho6")
+stretch_mode = 0
+flip_h = true
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/HBoxContainer" unique_id=1427047892]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture = ExtResource("2_k255t")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel/MarginContainer/HBoxContainer" unique_id=1789239386]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture = ExtResource("2_k255t")
+
+[node name="TextureRect3" type="TextureRect" parent="Panel/MarginContainer/HBoxContainer" unique_id=2115504268]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture = ExtResource("2_k255t")
+
+[node name="TextureButton2" type="TextureButton" parent="Panel/MarginContainer/HBoxContainer" unique_id=93650711]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture_normal = ExtResource("1_oqho6")
+stretch_mode = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel" unique_id=1577733958]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer2" unique_id=1562274595]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer2/VBoxContainer" unique_id=1575342740]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "JOB"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer2/VBoxContainer" unique_id=1412998549]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=674329822]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/scrollbar_h_separation = 4
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=1014781070]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=463739899 instance=ExtResource("3_fpfhf")]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=985615931]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "STAT FORZA 10"
+alignment = 0
+
+[node name="Button3" type="Button" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=878596201]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "STAT FORZA 10"
+alignment = 0
+
+[node name="Button4" type="Button" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=1118166510]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "STAT FORZA 10"
+alignment = 0
+
+[node name="Button5" type="Button" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=7108511]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "STAT FORZA 10"
+alignment = 0
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=1189453505]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/scrollbar_h_separation = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer2" unique_id=1823232036]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ability_bar" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" unique_id=1302797678 instance=ExtResource("4_gfvdy")]
+layout_mode = 2
+
+[node name="Ability_bar2" type="VBoxContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" unique_id=1949853702]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Ability_bar2" unique_id=1395357620 instance=ExtResource("4_gfvdy")]
+layout_mode = 2
+
+[node name="Ability_bar3" type="VBoxContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" unique_id=1222533105]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Ability_bar3" unique_id=1193881272 instance=ExtResource("4_gfvdy")]
+layout_mode = 2
+
+[node name="Ability_bar4" type="VBoxContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer" unique_id=463708318]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" parent="Panel/MarginContainer2/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Ability_bar4" unique_id=1137007878 instance=ExtResource("4_gfvdy")]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel" unique_id=443148233]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer3" unique_id=1873740024]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer3/VBoxContainer" unique_id=80370068]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "EQUIP"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer3/VBoxContainer" unique_id=1973083221]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer3/VBoxContainer/HBoxContainer" unique_id=692775626]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_cw07g")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer3/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=449912209]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Panel/MarginContainer3/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=680235296]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "TESTA: ELMO INCREDIBILE"
+alignment = 0
+
+[node name="Button2" type="Button" parent="Panel/MarginContainer3/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=2068276617]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "TESTA: ELMO INCREDIBILE"
+alignment = 0
+
+[node name="Button3" type="Button" parent="Panel/MarginContainer3/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=560824374]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "TESTA: ELMO INCREDIBILE"
+alignment = 0
+
+[node name="Button4" type="Button" parent="Panel/MarginContainer3/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" unique_id=1936674757]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "TESTA: ELMO INCREDIBILE"
+alignment = 0
+
+[node name="Button" type="Button" parent="." unique_id=336146469]
+z_index = 1
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 31.0
+text = "EXIT
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed_exit"]

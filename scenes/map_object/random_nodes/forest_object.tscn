@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://hcdki6jiv6lq"]
-
-[ext_resource type="PackedScene" uid="uid://unmgdielofxt" path="res://scenes/map_object/map_object.tscn" id="1_ekrfe"]
-[ext_resource type="Script" uid="uid://b3fbb5g8ovxy3" path="res://scenes/map_object/random_nodes/forest_onject.gd" id="2_nya48"]
-
-[node name="Map_object" unique_id=111385838 instance=ExtResource("1_ekrfe")]
-script = ExtResource("2_nya48")
