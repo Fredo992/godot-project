@@ -22,18 +22,11 @@ func _getEntityPositionsOnX(number_of_entities, entity_y):
 	return entity_positions
 
 
-static func _castToPackedScenes(asset_dictionary: Dictionary, key: String):
-	var file_dictionary:Dictionary = asset_dictionary[key]
+func _castToPackedScenes(resources: Array) -> Array[PackedScene]:
 	var scene_array: Array[PackedScene] = []
-
-	for value in file_dictionary.values():
-		var path = value
-		if ResourceLoader.exists(path):
-			var scene = load(path)
-			if scene is PackedScene:
-				scene_array.append(scene)
-		else:
-			print("Attenzione: Il path è errato o la risorsa non esiste: ", path)
+	for resource in resources:
+		if resource is PackedScene:
+			scene_array.append(resource)
 	return scene_array
 	
 func _makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
@@ -43,8 +36,12 @@ func _makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 
 func _generate_map() -> Array[Node]:
 	var space_between_rows = _getRowsSpacing(number_of_rows)
-	var fixed_scenes = _castToPackedScenes(AssetLoader.asset_dictionary, "fixed nodes")
-	var random_scenes =  _castToPackedScenes(AssetLoader.asset_dictionary, "random nodes")
+	
+	var fixed_folder = AssetLoader._get_folder("fixed nodes")
+	var random_folder = AssetLoader._get_folder("random nodes")
+	
+	var fixed_scenes = _castToPackedScenes(AssetLoader._get_resource_from_folder(fixed_folder))
+	var random_scenes =  _castToPackedScenes(AssetLoader._get_resource_from_folder(random_folder))
 	var map_cache: Array[Node]
 	
 	for i in range(number_of_rows):

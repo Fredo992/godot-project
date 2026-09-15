@@ -15,24 +15,24 @@ var fallbacks = {
 	
 
 var asset_dictionary: Dictionary[String, Dictionary] = {}
-
 var resource_cache: Dictionary[String, Resource] = {}
 
 func _ready():
 	_load_folders(ROOT)
-	print("--- Asset Loader Caricato ---")
-	print(_get_folder("GFGAGA"))
-	print("Memoria statica usata: ", Performance.get_monitor(Performance.MEMORY_STATIC) / 1024 / 1024, " MB")
-
-
-
 
 func _get_resource(folder_name_key: String, file_name_key: String, expected_extention: String = "none") -> Resource:
 	var path = _get_file(folder_name_key, file_name_key, expected_extention)  
 	if not resource_cache.has(path):
-		print("carico risorsa " + path )
 		resource_cache[path] = load(path)
 	return resource_cache[path]
+
+func _get_resource_from_folder(folder: Dictionary):
+	var resources = []
+	for file in folder.values():
+		if not resource_cache.has(file):
+			resource_cache[file] = load(file)
+		resources.append(resource_cache[file])
+	return resources
 
 func _get_folder(folder_name_key: String):
 	return asset_dictionary.get(folder_name_key, asset_dictionary["fallback resources"])
@@ -58,7 +58,7 @@ func _load_folders(path: String):
 	
 	var folder_name = pointer.get_current_dir().get_file()
 	var file_name = pointer.get_next()
-	
+
 	while file_name != "":
 		
 		if file_name == "." or file_name == "..":
@@ -77,8 +77,9 @@ func _load_folders(path: String):
 			if fallbacks.has(ext):
 				if(!asset_dictionary.has(folder_name)):
 					asset_dictionary[folder_name] = {}
-				if(!asset_dictionary[folder_name].has(file_name)):
+				if asset_dictionary[folder_name].has(file_name):
+					push_error("file conflitc: " + file_name + " already exists in another project folder, resource " + file_name + " won't be loaded")
+				else:
 					asset_dictionary[folder_name][file_name] = current_path
-		
 		file_name = pointer.get_next()
 		
