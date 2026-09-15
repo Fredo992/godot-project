@@ -28,7 +28,7 @@ func _get_available_abilities():
 	return available_abilities
 
 func _unlock_ability(index: int, job_lvl_key: int):
-	var ability_cost = abilities[job_lvl_key][index].ability_jp_cost._get_final_value()
+	var ability_cost = abilities[job_lvl_key][index].ability_jp_cost.final_value
 	var current_jp = self.jp.final_value
 	if (current_jp >= ability_cost):
 		self._spent_jp(ability_cost)

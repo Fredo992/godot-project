@@ -13,4 +13,4 @@ func _init(_stat_name: GameConstants.StatName, _referred_stat: Stat, _deriving_f
 
 func _on_referred_stat_changed(new_referred_value: int) -> void:
 	base_value = deriving_formula.call(new_referred_value)
-	self._get_final_value()
+	self._set_final_value()

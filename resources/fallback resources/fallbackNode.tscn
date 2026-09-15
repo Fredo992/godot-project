@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfxtppx13g8jy"]
 
-[ext_resource type="Texture2D" uid="uid://bkmamaqsokl36" path="res://resources/sprites/map nodes/exceptions/no_scene_error.png" id="1_8ussi"]
+[ext_resource type="Texture2D" uid="uid://bkmamaqsokl36" path="res://resources/fallback resources/no_scene_error.png" id="1_8ussi"]
 
 [node name="FallbackNode" type="Node2D" unique_id=1618850779]
 

@@ -3,9 +3,7 @@ extends MapObject
 
 func _setup() -> void:
 
-	var path = AssetLoader.get_file("fixed", "place_holder_shop.png")
-	var resource = load(path)
-	
+	var resource = AssetLoader._get_resource("fixed", "place_holder_shop.png")
 	var texture: Texture2D = resource as Texture2D
 	sprite.texture = texture
 	_setup_options_menu({

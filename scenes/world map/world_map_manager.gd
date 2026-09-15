@@ -30,7 +30,7 @@ func _ready() -> void:
 
 func _on_menu_requested(option_menu) -> void:
 	
-	var menu_type = AssetLoader.get_resource("menu", "popup_menu.tscn", "tscn") as PackedScene
+	var menu_type = AssetLoader._get_resource("menu", "popup_menu.tscn", "tscn") as PackedScene
 	open_menu = menu_type.instantiate() as MyPopupMenu
 
 	add_child(open_menu)
@@ -52,4 +52,4 @@ func _on_button_pressed_roaster():
 	for node in GameManager.map_cache:
 		if node.get_parent():
 			node.get_parent().remove_child(node) 
-	GameManager.change_scene(AssetLoader.get_file("inventory", "roaster.tscn", "tscn"))
+	GameManager.change_scene(AssetLoader._get_file("inventory", "roaster.tscn", "tscn"))

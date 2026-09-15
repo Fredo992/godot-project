@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b361axjgode6h"
-path="res://.godot/imported/no_sprite_error.png-448c4896d6f115776e4b8b4e2ca4ae58.ctex"
+uid="uid://bkmamaqsokl36"
+path="res://.godot/imported/no_scene_error.png-2cd7a246cd07daa7c50782fff405b4a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/map nodes/exceptions/no_sprite_error.png"
-dest_files=["res://.godot/imported/no_sprite_error.png-448c4896d6f115776e4b8b4e2ca4ae58.ctex"]
+source_file="res://resources/fallback resources/no_scene_error.png"
+dest_files=["res://.godot/imported/no_scene_error.png-2cd7a246cd07daa7c50782fff405b4a1.ctex"]
 
 [params]
 

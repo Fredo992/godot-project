@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bk5lo65qkp4n6"]
 
-[ext_resource type="Script" uid="uid://fmkqymhui2fo" path="res://scenes/world_map/world_map_manager.gd" id="1_cd3fp"]
+[ext_resource type="Script" uid="uid://fmkqymhui2fo" path="res://scenes/world map/world_map_manager.gd" id="1_cd3fp"]
 [ext_resource type="Texture2D" uid="uid://bj8lmo1j7uxpm" path="res://resources/sprites/map nodes/old/ChatGPT Image Jun 4, 2026, 03_36_50 PM.png" id="2_rpk6m"]
 [ext_resource type="StyleBox" uid="uid://yo8sl8cft5p1" path="res://resources/style/FF7Button.tres" id="3_lcn2y"]
 [ext_resource type="StyleBox" uid="uid://mdk1rivvts73" path="res://resources/style/PressedButton.tres" id="4_4m3x2"]
 [ext_resource type="StyleBox" uid="uid://bipcs04h6m5kn" path="res://resources/style/HoverButton.tres" id="5_67qyv"]
-[ext_resource type="Script" uid="uid://b5et0dtkfvf3e" path="res://scenes/world_map/camera_movement.gd" id="6_ig6v8"]
+[ext_resource type="Script" uid="uid://b5et0dtkfvf3e" path="res://scenes/world map/camera_movement.gd" id="6_ig6v8"]
 
 [node name="WorldMap" type="Control" unique_id=1365758619]
 layout_mode = 3

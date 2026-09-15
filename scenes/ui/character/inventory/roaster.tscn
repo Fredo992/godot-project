@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://c58fvip0s2a33" path="res://scenes/ui/character/inventory/roaster.gd" id="1_k255t"]
 [ext_resource type="Texture2D" uid="uid://bcgqv4f6h4wmf" path="res://resources/sprites/ui elements/arrow.png" id="1_oqho6"]
 [ext_resource type="Texture2D" uid="uid://c21gd5khbhkkb" path="res://resources/sprites/characters/goblin.png" id="2_k255t"]
-[ext_resource type="PackedScene" uid="uid://bpmb035ur7dof" path="res://scenes/ui/character/ui_elements/interactive_label.tscn" id="3_fpfhf"]
-[ext_resource type="PackedScene" uid="uid://ceiqv181lefjs" path="res://scenes/ui/character/ui_elements/ability_bar.tscn" id="4_gfvdy"]
+[ext_resource type="PackedScene" uid="uid://bpmb035ur7dof" path="res://scenes/ui/character/ui elements/interactive_label.tscn" id="3_fpfhf"]
+[ext_resource type="PackedScene" uid="uid://ceiqv181lefjs" path="res://scenes/ui/character/ui elements/ability_bar.tscn" id="4_gfvdy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cd3fp"]
 bg_color = Color(0.17285058, 0.67739516, 0.6953997, 1)

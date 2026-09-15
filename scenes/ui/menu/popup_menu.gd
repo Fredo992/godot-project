@@ -2,9 +2,9 @@
 class_name MyPopupMenu extends Control
 
 var menu_rect: Rect2
-var button_style_normal = AssetLoader.get_resource("style", "FF7Button.tres", "tres")
-var button_style_hover =  AssetLoader.get_resource("style", "HoverButton.tres", "tres")
-var button_style_pressed =  AssetLoader.get_resource("style", "PressedButton.tres", "tres")
+var button_style_normal = AssetLoader._get_resource("style", "FF7Button.tres", "tres")
+var button_style_hover =  AssetLoader._get_resource("style", "HoverButton.tres", "tres")
+var button_style_pressed =  AssetLoader._get_resource("style", "PressedButton.tres", "tres")
 @export var options_container: Control 
 
 func _on_instance(options: Dictionary[String, Callable]):

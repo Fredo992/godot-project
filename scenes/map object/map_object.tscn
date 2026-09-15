@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://unmgdielofxt"]
 
-[ext_resource type="Script" uid="uid://c3pxx7qsgs5u3" path="res://scenes/map_object/map_object.gd" id="1_w48oa"]
+[ext_resource type="Script" uid="uid://c3pxx7qsgs5u3" path="res://scenes/map object/map_object.gd" id="1_w48oa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
 size = Vector2(19, 22)

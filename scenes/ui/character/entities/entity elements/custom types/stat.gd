@@ -8,7 +8,7 @@ var final_value: int
 func _init(_base_value: int = 1, _stat_name = GameConstants.StatName.NONE):
 	stat_name = _stat_name
 	base_value = _base_value
-	self._get_final_value()
+	self._set_final_value()
 
 var modifiers: Dictionary[GameConstants.stat_modifier, Array] = {
 	GameConstants.stat_modifier.FLAT: [] as Array[int],
@@ -22,10 +22,10 @@ func _emit_value_changed() -> void:
 
 func _increment_base_value(amount: int):
 	base_value += amount
-	self._get_final_value()
+	self._set_final_value()
 	_emit_value_changed()
 
-func _get_final_value() -> void:
+func _set_final_value() -> void:
 	var flat_result = 0
 	var mult_result = 1
 	
@@ -39,12 +39,12 @@ func _get_final_value() -> void:
 
 func _add_modifier(value, modifier_type: GameConstants.stat_modifier) -> void:
 	modifiers[modifier_type].append(value)
-	self._get_final_value()
+	self._set_final_value()
 	
 
 func _remove_modifier(value, modifier_type: GameConstants.stat_modifier) -> void:
 	modifiers[modifier_type].erase(value)
-	self._get_final_value()
+	self._set_final_value()
 	
 func _clear_modifiers() -> void:
 	for array: Array in modifiers.values():

@@ -22,10 +22,11 @@ func _getEntityPositionsOnX(number_of_entities, entity_y):
 	return entity_positions
 
 
-func _castToPackedScenes(asset_dictionary: Dictionary, key: String):
-	var file_dictionary:File_dictionary = asset_dictionary[key]
+static func _castToPackedScenes(asset_dictionary: Dictionary, key: String):
+	var file_dictionary:Dictionary = asset_dictionary[key]
 	var scene_array: Array[PackedScene] = []
-	for value in file_dictionary.folder_dictionary.values():
+
+	for value in file_dictionary.values():
 		var path = value
 		if ResourceLoader.exists(path):
 			var scene = load(path)
@@ -42,8 +43,8 @@ func _makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 
 func _generate_map() -> Array[Node]:
 	var space_between_rows = _getRowsSpacing(number_of_rows)
-	var fixed_scenes = _castToPackedScenes(AssetLoader.asset_dictionary, "fixed_nodes")
-	var random_scenes =  _castToPackedScenes(AssetLoader.asset_dictionary, "random_nodes")
+	var fixed_scenes = _castToPackedScenes(AssetLoader.asset_dictionary, "fixed nodes")
+	var random_scenes =  _castToPackedScenes(AssetLoader.asset_dictionary, "random nodes")
 	var map_cache: Array[Node]
 	
 	for i in range(number_of_rows):
