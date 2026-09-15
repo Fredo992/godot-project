@@ -11,20 +11,20 @@ config_version=5
 [application]
 
 config/name="boh"
-run/main_scene="uid://bvax0dhh6i8bn"
+run/main_scene="uid://crd4qkgk6rxcl"
 config/features=PackedStringArray("4.7", "Mobile")
 
 [autoload]
 
-InputManager="*uid://becpnfcuy4xug"
 AssetLoader="*uid://b4m0axn51tswh"
 WorldMapManager="*uid://fmkqymhui2fo"
+GameManager="*uid://dijfq61n3yuch"
+JobTest="*uid://bl78ybv2qlr5x"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [dotnet]

@@ -16,8 +16,8 @@ func _on_instance(options: Dictionary[String, Callable]):
 		_setup_button_behavior(newButton, key, options[key])
 		options_container.add_child(newButton)
 		
-	var size = $SfondoMenu/OptionsContainer.get_combined_minimum_size()
-	menu_rect = Rect2($SfondoMenu/OptionsContainer.global_position, size)
+	var menu_size = $SfondoMenu/OptionsContainer.get_combined_minimum_size()
+	menu_rect = Rect2($SfondoMenu/OptionsContainer.global_position, menu_size)
 	
 #to debug visually
 func _draw() -> void:
