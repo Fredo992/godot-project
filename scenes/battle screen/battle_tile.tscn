@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bqxepdiv5cv7e"]
+
+[ext_resource type="Script" uid="uid://c1ob47opm84nw" path="res://scenes/battle screen/battle_tile.gd" id="1_spbdj"]
+[ext_resource type="Texture2D" uid="uid://ddhf4b4j448t7" path="res://resources/sprites/battleground/tiles/grass_tile.png" id="2_dxr1g"]
+
+[node name="BattleTile" type="Node2D" unique_id=792222466]
+script = ExtResource("1_spbdj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1319117814]
+texture_filter = 1
+texture = ExtResource("2_dxr1g")

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://eskdx46gilmx"]
+
+[ext_resource type="Script" uid="uid://b5et0dtkfvf3e" path="res://scenes/world map/camera_movement.gd" id="1_acp1h"]
+
+[node name="Camera2D2" type="Camera2D" unique_id=535912606]
+anchor_mode = 0
+drag_vertical_enabled = true
+script = ExtResource("1_acp1h")

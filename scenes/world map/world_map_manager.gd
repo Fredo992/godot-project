@@ -19,9 +19,9 @@ func _ready() -> void:
 		if not node.request_menu_open.is_connected(_on_menu_requested):
 			node.request_menu_open.connect(_on_menu_requested)
 		
-		if node.get_parent() == null:
-			node.z_index = 1
-			add_child(node)
+		#if node.get_parent() == null:
+			#node.z_index = 1
+			#add_child(node)
 
 
 func _on_menu_requested(option_menu) -> void:

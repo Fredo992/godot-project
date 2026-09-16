@@ -35,14 +35,17 @@ func _get_resource_from_folder(folder: Dictionary):
 	return resources
 
 func _get_folder(folder_name_key: String):
-	return asset_dictionary.get(folder_name_key, asset_dictionary["fallback resources"])
+	return asset_dictionary.get(folder_name_key)
 
 func _get_file(folder_name_key: String, file_name_key: String, expected_extention: String = "none") -> String:
 	if expected_extention != "none":
 		assert(fallbacks.has(expected_extention), "invalid extention: " + expected_extention)
 	
+
 	var fetched_folder: Dictionary = _get_folder(folder_name_key)
 	var fallback_folder: Dictionary = _get_folder("fallback resources")
+	print(folder_name_key)
+
 	
 	var default_fallback = fallbacks.get(expected_extention.to_lower(), "")
 	
