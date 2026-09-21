@@ -4,12 +4,11 @@ extends Node2D
 @export var tile_scene: PackedScene
 
 # Dimensioni della griglia (quante caselle vuoi in larghezza e altezza)
-@export var grid_width: int = 10
-@export var grid_height: int = 10
+@export var grid_width: int = 4
+@export var grid_height: int = 4
 
-# Dimensioni del tuo tassello (basate sul tuo disegno 64x32)
-@export var tile_width: int = 32
-@export var tile_height: int = 16
+@export var tile_width: int = 64
+@export var tile_height: int = 32
 
 # Un offset opzionale per centrare la mappa a schermo (es. spostarla più in basso)
 @export var map_offset_x: int = 320
@@ -20,23 +19,49 @@ func _ready() -> void:
 	generate_grid()
 
 func generate_grid() -> void:
-	for x in range(grid_width):
-		for y in range(grid_height):
-			# 1. Istanziamo la scena del tile
-			var tile = tile_scene.instantiate()
-			
-			# 2. Calcoliamo la posizione isometrica con la formula classica
-			# X screen = (GridX - GridY) * (TileWidth / 2)
-			# Y screen = (GridX + GridY) * (TileHeight / 2)
-			var screen_x = (x - y) * (tile_width / 2)
-			var screen_y = (x + y) * (tile_height / 2)
-			
-			# Applichiamo l'offset per non farlo partire dall'angolo esatto (0,0) dello schermo
-			tile.position = Vector2(screen_x + map_offset_x, screen_y + map_offset_y)
-			
-			# 3. Assegniamo le coordinate logiche se il tuo Tile.gd le prevede
-			if tile.has_method("set_grid_coordinates"):
-				tile.set_grid_coordinates(x, y)
-			
-			# 4. Aggiungiamo il tile come figlio del nodo BattleMap
-			add_child(tile)
+	var screen_width = get_viewport().get_visible_rect().size.x
+	print(screen_width)
+	print(screen_width / 64)
+	var number_of_tiles = screen_width / tile_width
+
+	var vector_offset = Vector2(map_offset_x, map_offset_y)
+	var vector_tile = Vector2(tile_width, tile_height)
+
+	var tile = tile_scene.instantiate()
+	var tile2 = tile_scene.instantiate()
+	var tile3 = tile_scene.instantiate()
+	var tile4 = tile_scene.instantiate()
+	var tile5 = tile_scene.instantiate()
+	var tile6 = tile_scene.instantiate()
+	var tile7 = tile_scene.instantiate()
+	var tile8 = tile_scene.instantiate()
+	var tile9 = tile_scene.instantiate()
+	
+	tile.position = linear_transform(0,0) + vector_offset
+	add_child(tile)
+	tile2.position = linear_transform(32,32) + vector_offset
+	add_child(tile2)
+	tile3.position = linear_transform(-32,32) + vector_offset
+	add_child(tile3)
+	tile4.position = linear_transform(0,32) + vector_offset
+	add_child(tile4)
+	tile5.position = linear_transform(0,-32) + vector_offset
+	add_child(tile5)
+	tile6.position = linear_transform(-32,0) + vector_offset
+	add_child(tile6)
+	tile7.position = linear_transform(-32,-32) + vector_offset
+	add_child(tile7)
+	tile8.position = linear_transform(32,0) + vector_offset
+	add_child(tile8)
+	tile9.position = linear_transform(32,-32) + vector_offset
+	add_child(tile9)
+
+func linear_transform(x,y):
+	var x_linear_transformation = Vector2(1,0.5)
+	var y_linear_transformation = Vector2(-1, 0.5)
+	var new_x = x * x_linear_transformation
+	var new_y = y * y_linear_transformation
+	print(new_y)
+	return new_x + new_y
+	
+		

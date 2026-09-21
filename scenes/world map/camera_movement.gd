@@ -22,6 +22,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			# GIRI VERSO IL BASSO -> la mappa sale, la visuale scende
 			position.y += scroll_speed
 
+
+
 	# --- 3. MOVIMENTO MOUSE (Trascina e sposta) ---
 	if event is InputEventMouseMotion and is_dragging:
 		position -= event.relative
