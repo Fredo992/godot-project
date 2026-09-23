@@ -19,6 +19,8 @@ func _ready() -> void:
 	area.input_event.connect(_on_area_input_event)
 	_setup()
 
+
+
 func _setup() -> void:
 	print("no children has been declared for this node!")
 	

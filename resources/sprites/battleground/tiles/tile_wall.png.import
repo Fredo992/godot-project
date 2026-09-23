@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg83ayu0vab43"
-path="res://.godot/imported/wall_sprite.png-973196f231fcf3f4b54b4e1d69b6d0b0.ctex"
+uid="uid://b3kf8ybgchk7t"
+path="res://.godot/imported/tile_wall.png-17ea7de4beae83edd3f2247bab1b7f55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/battleground/tiles/wall_sprite.png"
-dest_files=["res://.godot/imported/wall_sprite.png-973196f231fcf3f4b54b4e1d69b6d0b0.ctex"]
+source_file="res://resources/sprites/battleground/tiles/tile_wall.png"
+dest_files=["res://.godot/imported/tile_wall.png-17ea7de4beae83edd3f2247bab1b7f55.ctex"]
 
 [params]
 

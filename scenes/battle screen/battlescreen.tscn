@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://eskdx46gilmx" path="res://scenes/battle screen/camera_2d.tscn" id="2_1efds"]
 
 [node name="Battlescreen" type="Node2D" unique_id=2065180381]
+y_sort_enabled = true
 script = ExtResource("1_7qa4r")
 
-[node name="Camera2D2" parent="." unique_id=535912606 instance=ExtResource("2_1efds")]
+[node name="Camera2D2" parent="." unique_id=535912606 node_paths=PackedStringArray("map_node") instance=ExtResource("2_1efds")]
+map_node = NodePath("..")

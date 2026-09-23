@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bdtrfx1x7sekk"]
+
+[node name="TileWall" type="Node2D" unique_id=1524122850]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=446248839]
+texture_filter = 1
+centered = false
+offset = Vector2(-32, 0)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1331883276]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=705351822]
+visible = false
+polygon = PackedVector2Array(0, 0, 32, 16, 0, 32, -32, 16)

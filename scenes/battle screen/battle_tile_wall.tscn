@@ -1,15 +1,14 @@
-[gd_scene format=3 uid="uid://bqxepdiv5cv7e"]
+[gd_scene format=3 uid="uid://5i0rvhnjy26g"]
 
-[ext_resource type="Script" uid="uid://c1ob47opm84nw" path="res://scenes/battle screen/battle_tile.gd" id="1_spbdj"]
-[ext_resource type="Texture2D" uid="uid://cvng1eygexx6b" path="res://resources/sprites/battleground/tiles/tile_grass.png" id="2_dxr1g"]
+[ext_resource type="Script" uid="uid://c1ob47opm84nw" path="res://scenes/battle screen/battle_tile.gd" id="1_8hyr4"]
+[ext_resource type="Texture2D" uid="uid://b3kf8ybgchk7t" path="res://resources/sprites/battleground/tiles/tile_wall.png" id="2_8hyr4"]
 
 [node name="BattleTile" type="Node2D" unique_id=792222466]
-y_sort_enabled = true
-script = ExtResource("1_spbdj")
+script = ExtResource("1_8hyr4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1319117814]
 texture_filter = 1
-texture = ExtResource("2_dxr1g")
+texture = ExtResource("2_8hyr4")
 centered = false
 offset = Vector2(-32, 0)
 

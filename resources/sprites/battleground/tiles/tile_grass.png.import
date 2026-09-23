@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uwudleoisga3"
-path="res://.godot/imported/grid-tile2.png-622469be347b2764653b6b0c8bf97a16.ctex"
+uid="uid://cvng1eygexx6b"
+path="res://.godot/imported/tile_grass.png-8050a01c7ab942cad0de1535b8a2b272.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/battleground/tiles/grid-tile2.png"
-dest_files=["res://.godot/imported/grid-tile2.png-622469be347b2764653b6b0c8bf97a16.ctex"]
+source_file="res://resources/sprites/battleground/tiles/tile_grass.png"
+dest_files=["res://.godot/imported/tile_grass.png-8050a01c7ab942cad0de1535b8a2b272.ctex"]
 
 [params]
 

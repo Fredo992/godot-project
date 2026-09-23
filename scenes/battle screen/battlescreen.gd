@@ -1,52 +1,149 @@
 extends Node2D
 
-# Carichiamo la scena del tassello che hai appena creato
 @export var tile_scene: PackedScene
 
 var unit_pixels = 64
+var map_layers: Dictionary = {}
 
-# Dimensioni della griglia (quante caselle vuoi in larghezza e altezza)
-@export var grid_width: int = 4
-@export var grid_height: int = 4
+var grid_width = 10
+var grid_height = 10
 
-# Un offset opzionale per centrare la mappa a schermo (es. spostarla più in basso)
-@export var map_offset_x: int = 0
-@export var map_offset_y: int = 0
-var screen_width
-var screen_height
+var current_rotation: int = 0
+
+var viewport_size 
+var map_offset 
+var tile_scene_wall
+	
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_Q:
+			# Incrementa la rotazione da 0 a 3
+			current_rotation = (current_rotation + 1) % 4
+		elif event.keycode == KEY_E:
+			# Decrementa la rotazione gestendo il negativo in modo sicuro
+			current_rotation = (current_rotation - 1 + 4) % 4
+		else:
+			return # Se non è né Q né E, esce subito senza ricalcolare inutilmente
+					
+		match current_rotation:
+			0:
+				rotate_map(down_or_x, down_or_y)
+			1:
+				rotate_map(left_or_x, left_or_y)
+			2:
+				rotate_map(up_or_x, up_or_y)
+			3:
+				rotate_map(right_or_x, right_or_y)
 
 
 func _ready() -> void:
+	y_sort_enabled = true
 	tile_scene = AssetLoader._get_resource("battle screen","battle_tile.tscn", "tscn")
+	tile_scene_wall = AssetLoader._get_resource("battle screen","battle_tile_wall.tscn", "tscn")
+	
 	generate_grid()
 
 func generate_grid() -> void:
 	
-	var viewport_size = get_viewport().get_visible_rect().size
-	var map_offset = Vector2(viewport_size.x / 2, 10)
-	print(screen_width)
-	print(screen_height)
+	viewport_size = get_viewport().get_visible_rect().size
+	map_offset = Vector2(viewport_size.x / 2, 10)
+	
+
+
+	for y in range(10):
+		for x in range(10):
+			var tile: BattleTile = tile_scene.instantiate()
+			tile.position = linear_transform(x,y, down_or_x, down_or_y) + map_offset
+			tile.grid_x = x 
+			tile.grid_y = y 
+			_handle_elevation(tile, x, y)
+	
+
+func _handle_elevation(tile: BattleTile, grid_x, grid_y):
+	var random_height = randi_range(1, 4)
+	var base_position = tile.position
+	
+	if random_height == 0:
+		tile.position = base_position
+		tile.z_index = 0
+		add_child(tile)
+	else:
+	
+		tile.position = base_position + Vector2(0, random_height * -32)
+		tile.z_index = random_height
+		add_child(tile)
+		
+
+		for h in range(random_height):
+			var wall_block: BattleTile = tile_scene_wall.instantiate()
+			
+			var current_height_index = random_height - 1 - h
+			var y_height = (h + 1) * 32
+			
+			wall_block.position = base_position + Vector2(0, y_height - (random_height * 32))
+			wall_block.grid_x = grid_x
+			wall_block.grid_y = grid_y
+			wall_block.z_index = current_height_index
+			add_child(wall_block)
+
+			
+func linear_transform(x_coordinate,y_coordinate, x_ori, y_ori):
+	var x_pixels = x_coordinate * unit_pixels
+	var y_pixels = y_coordinate * unit_pixels
+	var x_linear_transformation = x_ori /2
+	var y_linear_transformation = y_ori /2
+	var new_x = x_pixels * x_linear_transformation 
+	var new_y = y_pixels * y_linear_transformation
+	var base_pos = new_x + new_y
+
+	return base_pos
 	
 	
-	var tile_number = 20
-	for y in range(tile_number):
-		for x in range(tile_number):
-			var tile = tile_scene.instantiate()
-			tile.position = linear_transform(x,y) + map_offset
-			print("iteration number " + str(x) + " for vector " + str(tile.position))
-			add_child(tile)
+func rotate_map(orientation_x, orientation_y):
+	for child in get_children():
+		# Filtriamo solo i nodi che sono tile (puoi usare un gruppo o il nome della classe)
+		if child is BattleTile: # Oppure: if child is BattleTile:
+			child.position = linear_transform(child.grid_x, child.grid_y, orientation_x, orientation_y) + map_offset
 
 
-@export var grid_widths: int = 4
-@export var grid_heights: int = 4
-@export var cell_size: int = 32
-@export var grid_color: Color = Color(1, 0, 0, 0.5) # Rosso semitrasparente
-var tile_color: Color = Color(1.0, 0.3, 0.3, 0.8)   # Rosso corallo
-var tile_color2: Color = Color(0.3, 1.0, 0.3, 0.8)  # Verde acceso
-var tile_color3: Color = Color(0.3, 0.6, 1.0, 0.8)  # Blu azzurro
-var tile_color4: Color = Color(1.0, 0.8, 0.2, 0.8)  # Giallo dorato
+func _on_rotate_map():
+	rotate_map(left_or_x, left_or_y)
 
-# gizmo for testing
+var left_or_x = Vector2(-1,0.5)
+var left_or_y = Vector2( -1,-0.5)
+var up_or_x =  Vector2( -1,-0.5)
+var up_or_y = Vector2(1,-0.5)
+var right_or_x = Vector2(1,-0.5)
+var right_or_y = Vector2(1, 0.5)
+var down_or_x = Vector2(1,0.5)
+var down_or_y = Vector2(-1,0.5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----------------testing----------------------
+
+#@export var grid_widths: int = 4
+#@export var grid_heights: int = 4
+#@export var cell_size: int = 32
+#@export var grid_color: Color = Color(1, 0, 0, 0.5) # Rosso semitrasparente
+#var tile_color: Color = Color(1.0, 0.3, 0.3, 0.8)   # Rosso corallo
+#var tile_color2: Color = Color(0.3, 1.0, 0.3, 0.8)  # Verde acceso
+#var tile_color3: Color = Color(0.3, 0.6, 1.0, 0.8)  # Blu azzurro
+#var tile_color4: Color = Color(1.0, 0.8, 0.2, 0.8)  # Giallo dorato
+
+
 #func _draw() -> void:
 ## Partiamo esattamente dall'origine locale (0,0) del nodo
 	#draw_set_transform(Vector2.ZERO, 0, Vector2(1, 1))
@@ -93,16 +190,3 @@ var tile_color4: Color = Color(1.0, 0.8, 0.2, 0.8)  # Giallo dorato
 #
 #func _process(_delta: float) -> void:
 	#queue_redraw()
-
-func linear_transform(x_coordinate,y_coordinate):
-	var x_pixels = x_coordinate * unit_pixels
-	var y_pixels = y_coordinate * unit_pixels
-	var x_linear_transformation = Vector2(1, 0.5) /2
-	var y_linear_transformation = Vector2(-1, 0.5) /2
-	var new_x = x_pixels * x_linear_transformation 
-	var new_y = y_pixels * y_linear_transformation
-	var base_pos = new_x + new_y
-
-	return base_pos
-	
-	
