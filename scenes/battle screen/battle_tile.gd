@@ -10,6 +10,7 @@ class_name BattleTile
 # Proprietà logiche del tassello
 var grid_x: int = 0
 var grid_y: int = 0
+var height: int = 0
 var is_walkable: bool = true
 
 func _on_area_input_event(_viewport, event: InputEvent, _shape_idx: int) -> void:
@@ -23,7 +24,7 @@ func _ready() -> void:
 	area.input_event.connect(_on_area_input_event)
 
 func _on_mouse_click() -> void:
-	print("hai cliccato " + str(self.grid_x) + " " + str(self.grid_y))
+	print("hai cliccato " + str(self.grid_x) + " " + str(self.grid_y) + " h: " + str(height))
 
 func _on_mouse_entered() -> void:
 	sprite.scale = Vector2(1.1, 1.1)
