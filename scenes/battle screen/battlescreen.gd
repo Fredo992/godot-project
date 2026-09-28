@@ -1,18 +1,25 @@
 extends Node2D
 
-@export var tile_scene: PackedScene
+var tile_scene: PackedScene
+var tile_scene_wall
+var tile_water
+var tile_medium_water
+var tiler_river
+
+
+
 
 var unit_pixels = 64
 var map_layers: Dictionary[int, Array] = {}
 
-var grid_width = 10
-var grid_height = 10
+var grid_width = 20
+var grid_height = 20
 
 var current_rotation: int = 0
 
 var viewport_size 
 var map_offset 
-var tile_scene_wall
+
 
 # --- AGGIUNTA 1: Variabile per il rumore ---
 var noise = FastNoiseLite.new()
@@ -38,8 +45,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	y_sort_enabled = true
-	tile_scene = AssetLoader._get_resource("battle screen","battle_tile.tscn", "tscn")
-	tile_scene_wall = AssetLoader._get_resource("battle screen","battle_tile_wall.tscn", "tscn")
+	tile_scene = AssetLoader._get_resource("plains","grass_tile.tscn", "tscn")
+	tile_scene_wall = AssetLoader._get_resource("plains","grass_tile_wall.tscn", "tscn")
+	tile_water = AssetLoader._get_resource("plains", "water_tile.tscn", "tscn")
+	tile_medium_water = AssetLoader._get_resource("plains", "water_tile_medium.tscn", "tscn")
+	tiler_river = AssetLoader._get_resource("plains", "water_tile_river.tscn", "tscn")
+	
+	
 	
 	# --- AGGIUNTA 2: Configurazione del FastNoiseLite ---
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
@@ -63,13 +75,13 @@ func generate_grid() -> void:
 			_handle_elevation(tile, x, y)
 
 	for layer in map_layers.values():
-		for tile in layer:
+		for tile: BattleTile in layer:
 			add_child(tile)
 
 func _handle_elevation(tile: BattleTile, grid_x, grid_y):
 	# --- MODIFICA: Sostituito randi_range con il Noise campionato su x e y ---
 	var raw_noise = noise.get_noise_2d(grid_x, grid_y) # Restituisce tra -1.0 e 1.0
-	var normalized_noise = (raw_noise + 1.0) / 2.0 # Lo portiamo tra 0.0 e 1.0
+	var normalized_noise = (raw_noise + 1.0) / 2.5 # Lo portiamo tra 0.0 e 1.0
 	
 	# Mappiamo il valore decimale in un'altezza discreta da 1 a 4
 	var random_height = 1
@@ -83,10 +95,10 @@ func _handle_elevation(tile: BattleTile, grid_x, grid_y):
 		random_height = 2
 	else:
 		random_height = 1
+	
 	# ----------------------------------------------------------------------
 
 	var base_position = tile.position
-	
 	for layer in range(random_height + 1):
 		if not map_layers.has(layer):
 			map_layers[layer] = []
@@ -107,7 +119,6 @@ func _handle_elevation(tile: BattleTile, grid_x, grid_y):
 			
 			var current_height_index = random_height - 1 - h
 			var y_height = (h + 1) * 32
-			
 			wall_block.position = base_position + Vector2(0, y_height - (random_height * 32))
 			wall_block.grid_x = grid_x
 			wall_block.grid_y = grid_y

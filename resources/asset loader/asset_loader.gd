@@ -20,6 +20,7 @@ var resource_cache: Dictionary[String, Resource] = {}
 func _ready():
 	_load_folders(ROOT)
 
+
 func _get_resource(folder_name_key: String, file_name_key: String, expected_extention: String = "none") -> Resource:
 	var path = _get_file(folder_name_key, file_name_key, expected_extention)  
 	if not resource_cache.has(path):
@@ -44,7 +45,7 @@ func _get_file(folder_name_key: String, file_name_key: String, expected_extentio
 
 	var fetched_folder: Dictionary = _get_folder(folder_name_key)
 	var fallback_folder: Dictionary = _get_folder("fallback resources")
-	print(folder_name_key)
+
 
 	
 	var default_fallback = fallbacks.get(expected_extention.to_lower(), "")

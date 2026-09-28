@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brgd368amher"
-path="res://.godot/imported/grid-tile.png-83f03786221af3a4f94d158d0529e648.ctex"
+uid="uid://cqk0f3qoo10gg"
+path="res://.godot/imported/empty_tile.png-712db82aba6f7c47c129c2e9f00205d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/battleground/tiles/grid-tile.png"
-dest_files=["res://.godot/imported/grid-tile.png-83f03786221af3a4f94d158d0529e648.ctex"]
+source_file="res://resources/sprites/battleground/tiles/empty_tile.png"
+dest_files=["res://.godot/imported/empty_tile.png-712db82aba6f7c47c129c2e9f00205d2.ctex"]
 
 [params]
 
