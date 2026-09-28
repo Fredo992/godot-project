@@ -1,13 +1,10 @@
 extends Node2D
 
 var tile_scene: PackedScene
-var tile_scene_wall
-var tile_water
-var tile_medium_water
-var tiler_river
-
-
-
+var tile_scene_wall: PackedScene
+var tile_water: PackedScene
+var tile_medium_water: PackedScene
+var tiler_river: PackedScene
 
 var unit_pixels = 64
 var map_layers: Dictionary[int, Array] = {}
@@ -20,9 +17,9 @@ var current_rotation: int = 0
 var viewport_size 
 var map_offset 
 
-
-# --- AGGIUNTA 1: Variabile per il rumore ---
+# --- RUMORI ---
 var noise = FastNoiseLite.new()
+var river_noise = FastNoiseLite.new() # <-- Rumore dedicato al fiume/acqua
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -51,11 +48,9 @@ func _ready() -> void:
 	tile_medium_water = AssetLoader._get_resource("plains", "water_tile_medium.tscn", "tscn")
 	tiler_river = AssetLoader._get_resource("plains", "water_tile_river.tscn", "tscn")
 	
-	
-	
-	# --- AGGIUNTA 2: Configurazione del FastNoiseLite ---
+	# --- CONFIGURAZIONE FASTNOISELITE (Elevazione) ---
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
-	noise.frequency = 0.08 # Più è basso, più le colline sono larghe
+	noise.frequency = 0.08 
 	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
 	noise.seed = randi()
 	
@@ -66,26 +61,21 @@ func generate_grid() -> void:
 	viewport_size = get_viewport().get_visible_rect().size
 	map_offset = Vector2(viewport_size.x / 2, 10)
 
-	for y in range(20):
-		for x in range(20):
-			var tile: BattleTile = tile_scene.instantiate()
-			tile.position = linear_transform(x,y, down_or_x, down_or_y) + map_offset
-			tile.grid_x = x 
-			tile.grid_y = y 
-			_handle_elevation(tile, x, y)
+	for y in range(grid_height):
+		for x in range(grid_width):
+			_handle_tile_generation(x, y)
 
 	for layer in map_layers.values():
 		for tile: BattleTile in layer:
 			add_child(tile)
 
-func _handle_elevation(tile: BattleTile, grid_x, grid_y):
-	# --- MODIFICA: Sostituito randi_range con il Noise campionato su x e y ---
-	var raw_noise = noise.get_noise_2d(grid_x, grid_y) # Restituisce tra -1.0 e 1.0
-	var normalized_noise = (raw_noise + 1.0) / 2.5 # Lo portiamo tra 0.0 e 1.0
+func _handle_tile_generation(grid_x: int, grid_y: int) -> void:
+	# 1. Calcolo l'elevazione con il primo rumore
+	var raw_noise = noise.get_noise_2d(grid_x, grid_y)
+	var normalized_noise = (raw_noise + 1.0) / 2.5
 	
-	# Mappiamo il valore decimale in un'altezza discreta da 1 a 4
 	var random_height = 1
-	if normalized_noise >.90:
+	if normalized_noise > .90:
 		random_height = 5
 	elif normalized_noise > 0.75:
 		random_height = 4
@@ -95,10 +85,19 @@ func _handle_elevation(tile: BattleTile, grid_x, grid_y):
 		random_height = 2
 	else:
 		random_height = 1
-	
-	# ----------------------------------------------------------------------
 
-	var base_position = tile.position
+	var current_tile_scene = tile_scene
+
+	var tile: BattleTile = current_tile_scene.instantiate()
+	var base_position = linear_transform(grid_x, grid_y, down_or_x, down_or_y) + map_offset
+	
+	tile.position = base_position
+	tile.grid_x = grid_x 
+	tile.grid_y = grid_y 
+
+	_handle_elevation(tile, base_position, random_height, grid_x, grid_y)
+
+func _handle_elevation(tile: BattleTile, base_position: Vector2, random_height: int, grid_x: int, grid_y: int):
 	for layer in range(random_height + 1):
 		if not map_layers.has(layer):
 			map_layers[layer] = []
@@ -126,7 +125,7 @@ func _handle_elevation(tile: BattleTile, grid_x, grid_y):
 			wall_block.height = tile.height - (h+1)
 			map_layers[tile.height - (h+1)].append(wall_block)
 			
-func linear_transform(x_coordinate,y_coordinate, x_ori, y_ori, h=0):
+func linear_transform(x_coordinate, y_coordinate, x_ori, y_ori, h=0):
 	var x_pixels = x_coordinate * unit_pixels
 	var y_pixels = y_coordinate * unit_pixels
 	var x_linear_transformation = x_ori /2
@@ -142,7 +141,7 @@ func linear_transform(x_coordinate,y_coordinate, x_ori, y_ori, h=0):
 func rotate_map(orientation_x, orientation_y):
 	for array in map_layers.values():
 		for tile: BattleTile in array:
-			tile.position = linear_transform(tile.grid_x, tile.grid_y, orientation_x, orientation_y, tile.height)
+			tile.position = linear_transform(tile.grid_x, tile.grid_y, orientation_x, orientation_y, tile.height) + map_offset
 
 const left_or_x = Vector2(-1,0.5)
 const left_or_y = Vector2( -1,-0.5)
