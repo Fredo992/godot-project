@@ -26,6 +26,9 @@ func _ready() -> void:
 
 func _on_menu_requested(option_menu) -> void:
 	
+	if open_menu:
+		open_menu.queue_free()
+	
 	var menu_type = AssetLoader._get_resource("menu", "popup_menu.tscn", "tscn") as PackedScene
 	open_menu = menu_type.instantiate() as MyPopupMenu
 
