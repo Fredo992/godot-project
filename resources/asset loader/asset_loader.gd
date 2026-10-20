@@ -42,7 +42,6 @@ func _get_file(folder_name_key: String, file_name_key: String, expected_extentio
 	if expected_extention != "none":
 		assert(fallbacks.has(expected_extention), "invalid extention: " + expected_extention)
 	
-
 	var fetched_folder: Dictionary = _get_folder(folder_name_key)
 	var fallback_folder: Dictionary = _get_folder("fallback resources")
 
@@ -86,4 +85,3 @@ func _load_folders(path: String):
 				else:
 					asset_dictionary[folder_name][file_name] = current_path
 		file_name = pointer.get_next()
-		
