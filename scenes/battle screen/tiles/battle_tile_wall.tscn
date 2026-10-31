@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c0oj523pyht3g"]
+
+[ext_resource type="Script" uid="uid://c1ob47opm84nw" path="res://scenes/battle screen/tiles/battle_tile.gd" id="1_couws"]
+[ext_resource type="Texture2D" uid="uid://b3kf8ybgchk7t" path="res://resources/sprites/battleground/tiles/tile_wall.png" id="2_mdaq7"]
+
+[node name="BattleTile" type="Node2D" unique_id=792222466]
+script = ExtResource("1_couws")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1319117814]
+texture_filter = 1
+texture = ExtResource("2_mdaq7")
+centered = false
+offset = Vector2(-32, 0)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=547093595]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=963234079]
+polygon = PackedVector2Array(0, 0, 32, 16, 0, 32, -32, 16)

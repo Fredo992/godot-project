@@ -1,7 +1,6 @@
 class_name AbilityBuilder
 extends RefCounted
 
-# Valori di default interni
 var _name: String = "Default Ability"
 var _description: String = "No description"
 var _target_type: GameConstants.target_type = GameConstants.target_type.NONE

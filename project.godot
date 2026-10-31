@@ -16,7 +16,6 @@ config/features=PackedStringArray("4.7", "Mobile")
 [autoload]
 
 AssetLoader="*uid://b4m0axn51tswh"
-WorldMapManager="*uid://fmkqymhui2fo"
 GameManager="*uid://dijfq61n3yuch"
 
 [display]

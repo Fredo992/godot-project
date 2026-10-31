@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cn4iyl2l2iyjb"]
+
+[ext_resource type="PackedScene" uid="uid://bqxepdiv5cv7e" path="res://scenes/battle screen/tiles/battle_tile.tscn" id="1_ura57"]
+[ext_resource type="Script" uid="uid://blh0cqkt23ns" path="res://scenes/battle screen/tiles/plains/water_tile.gd" id="2_6dhpp"]
+
+[node name="BattleTile" unique_id=792222466 instance=ExtResource("1_ura57")]
+script = ExtResource("2_6dhpp")

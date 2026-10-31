@@ -22,12 +22,12 @@ func _getEntityPositionsOnX(number_of_entities, entity_y):
 	return entity_positions
 
 
-func _castToPackedScenes(resources: Array) -> Array[PackedScene]:
-	var scene_array: Array[PackedScene] = []
-	for resource in resources:
-		if resource is PackedScene:
-			scene_array.append(resource)
-	return scene_array
+#func _castToPackedScenes(resources: Array) -> Array[PackedScene]:
+	#var scene_array: Array[PackedScene] = []
+	#for resource in resources:
+		#if resource is PackedScene:
+			#scene_array.append(resource)
+	#return scene_array
 	
 func _makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 	var instance = scene.instantiate()
@@ -37,25 +37,23 @@ func _makeInstanceOfScene(scene :PackedScene, entity_pos :Vector2):
 func _generate_map() -> Array[Node]:
 	var space_between_rows = _getRowsSpacing(number_of_rows)
 	
-	var fixed_folder = AssetLoader._get_folder("fixed nodes")
+
 	var random_folder = AssetLoader._get_folder("random nodes")
-	
-	var fixed_scenes = _castToPackedScenes(AssetLoader._get_resource_from_folder(fixed_folder))
-	var random_scenes =  _castToPackedScenes(AssetLoader._get_resource_from_folder(random_folder))
+	var random_scenes = AssetLoader._get_resource_from_folder(random_folder)
 	var map_cache: Array[Node]
 	
 	for i in range(number_of_rows):
 		if (i == 0):
 			var positions = _getEntityPositionsOnX(1, (space_between_rows * (i+1)))
-			map_cache.append(_makeInstanceOfScene(fixed_scenes[0], positions[0]))
+			map_cache.append(_makeInstanceOfScene(AssetLoader._get_resource("fixed nodes", "castle_object.tscn", "tscn"), positions[0]))
 		elif (i == number_of_rows -1):
 			var positions = _getEntityPositionsOnX(1, (space_between_rows * (i+1)))
-			map_cache.append(_makeInstanceOfScene(fixed_scenes[0], positions[0]))
+			map_cache.append(_makeInstanceOfScene(AssetLoader._get_resource("fixed nodes","castle_object.tscn", "tscn"), positions[0]))
 		elif (i%4 == 0):
 			var positions = _getEntityPositionsOnX(1, (space_between_rows * (i+1)))
-			map_cache.append(_makeInstanceOfScene(fixed_scenes[1], positions[0]))
+			map_cache.append(_makeInstanceOfScene(AssetLoader._get_resource("fixed nodes","shop_object.tscn", "tscn"), positions[0]))
 		else:
 			for entity_pos in _getEntityPositionsOnX(randi_range(1,4), (space_between_rows * (i+1))):
-				map_cache.append(_makeInstanceOfScene(random_scenes[randi_range(1,random_scenes.size())-1], entity_pos))
+				map_cache.append(_makeInstanceOfScene(random_scenes[randi_range(0, random_scenes.size() - 1)], entity_pos))
 
 	return map_cache

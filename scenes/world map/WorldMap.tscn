@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://mdk1rivvts73" path="res://resources/style/PressedButton.tres" id="4_4m3x2"]
 [ext_resource type="StyleBox" uid="uid://bipcs04h6m5kn" path="res://resources/style/HoverButton.tres" id="5_67qyv"]
 [ext_resource type="Script" uid="uid://b5et0dtkfvf3e" path="res://scenes/world map/camera_movement.gd" id="6_ig6v8"]
+[ext_resource type="PackedScene" uid="uid://eskdx46gilmx" path="res://scenes/battle screen/camera_2d.tscn" id="7_87nac"]
 
 [node name="WorldMap" type="Control" unique_id=1365758619]
 layout_mode = 3
@@ -83,5 +84,7 @@ text = "Diary
 anchor_mode = 0
 drag_vertical_enabled = true
 script = ExtResource("6_ig6v8")
+
+[node name="Camera2D2" parent="." unique_id=535912606 instance=ExtResource("7_87nac")]
 
 [connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/Button" to="." method="_on_button_pressed_roaster"]
