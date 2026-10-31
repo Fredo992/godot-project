@@ -19,10 +19,84 @@ var current_rotation: int = 0
 var viewport_size 
 var map_offset 
 
-# --- RUMORI ---
 var noise = FastNoiseLite.new()
-var river_noise = FastNoiseLite.new() # <-- Rumore dedicato al fiume/acqua
+
+func _draw_a_river():
+	var x = 0
+	var y = 0
+
+	if randi() % 2 == 0:
+		# L'asse X è bloccata a 0, la Y è casuale lungo il bordo sinistro
+		x = 0
+		y = randi_range(0, grid_height -1)
+	else:
+		# L'asse Y è bloccata a 0, la X è casuale lungo il bordo superiore
+		x = randi_range(0, grid_width -1 )
+		y = 0
+
+	var punto_partenza = Vector2i(x, y)
 	
+	var punto_arrivo = Vector2i((grid_width -1) - punto_partenza.x, (grid_height -1) - punto_partenza.y)
+	
+	var x_grow = 0
+	var y_grow = 0
+	if (punto_partenza.x != punto_arrivo.x):
+		x_grow = 1 if punto_partenza.x < punto_arrivo.x else -1
+	if (punto_partenza.y != punto_arrivo.y):
+		y_grow = 1 if punto_partenza.y < punto_arrivo.y else -1
+	print(x_grow)
+	print(y_grow)
+	var new_pos_x = punto_partenza.x
+	var new_pos_y = punto_partenza.y
+	var distanza_x = abs(punto_partenza.x - punto_arrivo.x)
+	var distanza_y = abs(punto_partenza.y - punto_arrivo.y)
+	var total_steps = distanza_x + distanza_y
+
+	var diagonal_steps:float = min(distanza_x, distanza_y)
+	var straight_steps:float = total_steps - (diagonal_steps * 2)
+
+	print("partenza: " + str(punto_partenza))
+	print("arrivo: " + str(punto_arrivo))
+	print ("STEP TOTALI " + str(total_steps))
+	print("diagonale: " + str(diagonal_steps))
+	print("straight: " + str(straight_steps))
+
+	var new_position
+	var current_pos = punto_partenza
+	while current_pos != punto_arrivo:
+		# Scegli se fare una diagonale (se ce ne sono ancora disponibili)
+		# oppure se fare un passo dritto
+		var can_do_diagonal = diagonal_steps > 0
+		var can_do_straight = straight_steps > 0
+		
+		# Decide casualmente solo se entrambe le opzioni sono ancora disponibili
+		var do_diagonal = false
+		if can_do_diagonal and can_do_straight:
+			do_diagonal = (randi() % 2 == 0)
+		elif can_do_diagonal:
+			do_diagonal = true
+
+		if do_diagonal:
+			# Muovi su entrambi gli assi (1 passo X + 1 passo Y)
+			current_pos.x += x_grow
+			current_pos.y += y_grow
+			diagonal_steps -= 1
+			total_steps -= 2  # Consuma 2 passi dal totale!
+		else:
+			# Muovi solo sull'asse che ha ancora distanza da coprire
+			if (current_pos.x != punto_arrivo.x) and (distanza_x > distanza_y or current_pos.y == punto_arrivo.y):
+				current_pos.x += x_grow
+			else:
+				current_pos.y += y_grow
+				
+			straight_steps -= 1
+			total_steps -= 1
+			
+		print(current_pos)
+
+
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_Q:
@@ -43,6 +117,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				rotate_map(right_or_x, right_or_y)
 
 func _ready() -> void:
+	_draw_a_river()
+
+
 	y_sort_enabled = true
 	tile_scene = AssetLoader._get_resource("plains","grass_tile.tscn", "tscn")
 	tile_scene_wall = AssetLoader._get_resource("plains","grass_tile_wall.tscn", "tscn")
